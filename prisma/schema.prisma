@@ -1,0 +1,30 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model locations {
+  time_open     DateTime       @db.Time(6)
+  time_closed   DateTime       @db.Time(6)
+  index         Int            @id(map: "locations_pk") @default(autoincrement())
+  name          String         @db.VarChar
+  sub_locations sub_locations?
+
+  @@index([index])
+  @@ignore
+}
+
+model sub_locations {
+  capacity     Decimal   @db.Decimal
+  max_capacity Decimal   @db.Decimal
+  index        Int       @id(map: "sub_locations_pk") @default(autoincrement())
+  name         String    @db.VarChar
+  locations    locations @relation(fields: [index], references: [index], onDelete: NoAction, onUpdate: NoAction, map: "sub_locations_fk")
+
+  @@index([index])
+  @@ignore
+}

@@ -1,5 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
+import prisma from '../../lib/prisma'
 
-export default (req: NextApiRequest, res: NextApiResponse) => {
-	res.status(200).json({ name: 'John Doe' })
+export default async (req: NextApiRequest, res: NextApiResponse) => {
+	const data = await prisma.sub_locations.findMany()
+	setTimeout(() => res.status(200).json(data), 400)
 }

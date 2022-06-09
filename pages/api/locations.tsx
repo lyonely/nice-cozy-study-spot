@@ -1,7 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import mockData from "./mockData.json"
+import prisma from '../../lib/prisma'
 
-export default (req: NextApiRequest, res: NextApiResponse) => {
-	console.log(mockData.locations)
-	setTimeout(() => res.status(200).json(mockData.locations), 4000)
+export default async (req: NextApiRequest, res: NextApiResponse) => {
+	const data = await prisma.locations.findMany({
+		include: {
+			sub_locations: true
+		}
+	})
+	setTimeout(() => res.status(200).json(data), 400)
 }

@@ -11,7 +11,7 @@ export default function Home() {
 			<main>
 				<div className="container__vert">
 					<div className="landing">
-						<div className="landing__title">Welcome!</div>
+						<div className="landing__title">Welcome???!</div>
 						<p> Let us help you find good study spaces.</p>
 						<div>
 							<Link href="/studyspaces">

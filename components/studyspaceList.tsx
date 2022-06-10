@@ -8,7 +8,7 @@ export default function StudySpaceList({ studyspaces }) {
 				<div>
 					<Link href={`${location.name}`}>{location.name}</Link>
 					<p>Subareas:</p>
-					<SubStudySpaces subareas={location.subareas} />
+					<SubStudySpaces subareas={location.sub_locations} />
 				</div>)
 			)}
 		</div>

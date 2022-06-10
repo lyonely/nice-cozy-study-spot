@@ -1,22 +1,24 @@
 import Head from 'next/head'
-import Link from 'next/link';
-import useSWR from 'swr'
-
+import Link from 'next/link'
 export default function Home() {
 	return (
-		<div className="container">
+		<div>
 			<Head>
 				<title>Imperial Study Spaces</title>
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
 			<main>
-				<h1>Welcome!</h1>
-				<p> Let us help you find good study spaces.</p>
-				<div>
-					<Link href="/studyspaces">
-						<a className="landing_proceed">Lets go</a>
-					</Link>
+				<div className="container__vert">
+					<div className="landing">
+						<div className="landing__title">Welcome!</div>
+						<p> Let us help you find good study spaces.</p>
+						<div>
+							<Link href="/studyspaces">
+								<a className="landing_proceed">Lets go</a>
+							</Link>
+						</div>
+					</div>
 				</div>
 			</main>
 			{/* <h1 className="title">

@@ -27,13 +27,17 @@ body {
 	@extend .card;
 	flex-direction: column;
 	padding: 1.25em 1.25em 1.25em 1.25em;
-	width: 80%;
 	background-color: white;
 
 	&__title {
 		font-family: $DM-serif;
 		font-size: 3em;
 	}
+}
+
+.landing-button {
+    margin-left: auto;
+    margin-right: 0;
 }
 
 .card {

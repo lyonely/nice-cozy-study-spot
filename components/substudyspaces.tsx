@@ -1,9 +1,8 @@
 import Link from "next/link";
-import { Badge, Group, Text, useMantineTheme, Divider, Button, Container } from "@mantine/core"
+import { Badge, Group, Text, Button, Container } from "@mantine/core"
 
 export default function SubStudySpaces({ location, subareas }) {
 
-	const theme = useMantineTheme()
 	const badgeGenerator = (capacity) => {
 		if (capacity > 80) {
 			return <Badge color="pink" variant="light">
@@ -28,7 +27,7 @@ export default function SubStudySpaces({ location, subareas }) {
 
 			return (<Group>
 				<Link href={`/${location}/${subarea.name}`} >
-					<Button variant="light" fullWidth style={{ height: "auto", marginBottom: "0.25em", padding: "0.25em" }}>
+					<Button variant="light" color="yellow" fullWidth style={{ height: "auto", marginBottom: "0.25em", padding: "0.25em", color: "black" }}>
 						<Container>
 							<Text align="left" style={{ width: "50%" }} weight={500}>
 								{subarea.name}</Text>

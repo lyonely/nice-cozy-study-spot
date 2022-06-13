@@ -36,22 +36,22 @@ body {
 		font-size: 3em;
 	}
 
-    &__desc {
-        font-family: $DM-sans;
-        font-size: 20px;
-    }
+	&__desc {
+		font-family: $DM-sans;
+		font-size: 20px;
+	}
 
-    &__button {
-        margin-left: auto;
-        margin-right: 0;
-    }
+	&__button {
+		margin-left: auto;
+		margin-right: 0;
+	}
 }
 
 .hotbar {
-    &__title {
-        font-family: $DM-sans;
-        font-size: 1.25em;
-    }
+	&__title {
+		font-family: $DM-sans;
+		font-size: 1.25em;
+	}
 }
 
 .card {
@@ -61,6 +61,5 @@ body {
 }
 
 .bg {
-    background-color: $primary-color;
-    height: 100vh;
+	background-color: $primary-color;
 }

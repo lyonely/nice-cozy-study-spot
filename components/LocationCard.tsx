@@ -1,14 +1,11 @@
-import { Card, Image, Text, Group, useMantineTheme, Badge, Accordion, createStyles } from '@mantine/core'
+import { Card, Image, Text, Group, Badge, Accordion, createStyles } from '@mantine/core'
 import { useState } from 'react'
+import { AppTheme } from '../style/AppTheme';
 import SubStudySpaces from './substudyspaces';
 import Link from 'next/link'
 
 export default function LocationCard({ imgPath, name, sub_locations }) {
-	const theme = useMantineTheme()
-
-	const [showsub, setShowsub] = useState(false)
-
-	const useStyles = createStyles((theme, _params, getRef) => ({
+	const useStyles = createStyles((theme) => ({
 		content: {
 			paddingLeft: 0
 		}
@@ -29,7 +26,7 @@ export default function LocationCard({ imgPath, name, sub_locations }) {
 				</Link>
 			</Card.Section>
 			<Link href={name} passHref>
-				<Group position="apart" style={{ marginBottom: 5, marginTop: theme.spacing.sm }}>
+				<Group position="apart" style={{ marginTop: "1em" }}>
 					<Text weight={500}>{name}</Text>
 					<Badge color="pink" variant="light">
 						Capacity: 90%
@@ -38,9 +35,6 @@ export default function LocationCard({ imgPath, name, sub_locations }) {
 			</Link>
 			<Accordion classNames={classes}>
 				<Accordion.Item label="Details">
-					{/* <Center onClick={handleShowSub}>
-						Details{showsub ? <ChevronUp /> : <ChevronDown />}
-					</Center> */}
 					<SubStudySpaces location={name} subareas={sub_locations} />
 				</Accordion.Item>
 			</Accordion>

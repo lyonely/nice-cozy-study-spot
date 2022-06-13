@@ -1,7 +1,23 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import { Paper } from '@mantine/core'
+import RoundPaper from '../components/RoundPaper'
+import { Container } from '@mantine/core'
+
 export default function Home() {
+    const mainContent = () => {
+        return (
+            <div className="landing">
+                <div className="landing__title">Welcome!</div>
+                <p> Let us help you find good study spaces.</p>
+                <div>
+                    <Link href="/studyspaces">
+                        <a className="landing_proceed">Lets go</a>
+                    </Link>
+                </div>
+			</div>
+        );
+    }
+
 	return (
 		<div>
 			<Head>
@@ -11,17 +27,11 @@ export default function Home() {
 
 			<main>
 				{/* <div className="container__vert"> */}
-				<Paper shadow="sm" p="md">
-					<div className="landing">
-						<div className="landing__title">Welcome!</div>
-						<p> Let us help you find good study spaces.</p>
-						<div>
-							<Link href="/studyspaces">
-								<a className="landing_proceed">Lets go</a>
-							</Link>
-						</div>
-					</div>
-				</Paper>
+
+                <Container size="xs">
+				    <RoundPaper content={mainContent()} />
+				</Container>
+
 				{/* </div> */}
 			</main>
 			{/* <h1 className="title">

@@ -29,7 +29,7 @@ export default function TopBar() {
                     backgroundColor: theme.colors.brown[0],
                 })}>
                     <Space h="xs" />
-                        <Link href="https://mantine.dev/core/action-icon/">
+                        <Link href="/">
                             <Group>
                                 <MapPin />
                             

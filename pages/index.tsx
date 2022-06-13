@@ -1,23 +1,10 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import RoundPaper from '../components/RoundPaper'
-import { Container } from '@mantine/core'
+import LandingPage from '../components/LandingPage'
+import { MantineProvider } from '@mantine/core'
+import { AppTheme } from '../style/AppTheme'
 
 export default function Home() {
-    const mainContent = () => {
-        return (
-            <div className="landing">
-                <div className="landing__title">Welcome!</div>
-                <p> Let us help you find good study spaces.</p>
-                <div>
-                    <Link href="/studyspaces">
-                        <a className="landing_proceed">Lets go</a>
-                    </Link>
-                </div>
-			</div>
-        );
-    }
-
 	return (
 		<div>
 			<Head>
@@ -26,13 +13,9 @@ export default function Home() {
 			</Head>
 
 			<main>
-				{/* <div className="container__vert"> */}
-
-                <Container size="xs">
-				    <RoundPaper content={mainContent()} />
-				</Container>
-
-				{/* </div> */}
+                <MantineProvider theme={AppTheme} withGlobalStyles withNormalizeCSS >
+                    <LandingPage />
+                </MantineProvider>
 			</main>
 			{/* <h1 className="title">
 					Welcome to <a href="https://nextjs.org">Next.js!</a>

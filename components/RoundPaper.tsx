@@ -5,5 +5,5 @@ export default function RoundPaper({content}) {
         <Paper shadow="sm" radius="lg" p="md" withBorder>
             <Text>{content}</Text>
         </Paper>
-    )
+    );
 }

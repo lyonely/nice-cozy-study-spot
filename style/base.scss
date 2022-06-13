@@ -1,11 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap');
 $DM-serif: 'DM Serif Display', serif;
 
-$font-stack: Helvetica, sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans&display=swap');
+$DM-sans: 'DM Sans', sans-serif;
+
 $primary-color: #FAF0D4;
 
 body {
-	font: 100% $font-stack;
+	font: 100% $DM-sans;
 	background-color: $primary-color;
 }
 
@@ -27,17 +29,38 @@ body {
 	@extend .card;
 	flex-direction: column;
 	padding: 1.25em 1.25em 1.25em 1.25em;
-	width: 80%;
 	background-color: white;
 
 	&__title {
 		font-family: $DM-serif;
 		font-size: 3em;
 	}
+
+    &__desc {
+        font-family: $DM-sans;
+        font-size: 20px;
+    }
+
+    &__button {
+        margin-left: auto;
+        margin-right: 0;
+    }
+}
+
+.hotbar {
+    &__title {
+        font-family: $DM-sans;
+        font-size: 1.25em;
+    }
 }
 
 .card {
 	@extend .container;
 	border-radius: 2em;
 	box-shadow: 0.5em;
+}
+
+.bg {
+    background-color: $primary-color;
+    height: 100vh;
 }

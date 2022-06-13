@@ -9,11 +9,11 @@ export default function LandingPage() {
         return (
             <div className="landing">
                 <div className="landing__title">Welcome!</div>
-                <p> Let us help you find good study spaces.</p>
-                <div className="landing-button">
+                <p className="landing__desc"> Let us help you find good study spaces.</p>
+                <div className="landing__button">
                     <Link href="/studyspaces">
-                    <Button color="yellow" radius="xl" size="xl" >
-                        Let's go!
+                    <Button color="yellow" radius="xl" size="xl" variant="filled" >
+                        <p className="landing__desc">Let's go!</p>
                     </Button>
                     </Link>
                 </div>

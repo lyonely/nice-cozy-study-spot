@@ -1,4 +1,4 @@
-import { Box, Space, ActionIcon, Center} from '@mantine/core'
+import { Box, Space, Group } from '@mantine/core'
 import { MapPin } from 'react-feather';
 import Link from 'next/link'
 import { createStyles } from '@mantine/core';
@@ -29,9 +29,13 @@ export default function TopBar() {
                     backgroundColor: theme.colors.brown[0],
                 })}>
                     <Space h="xs" />
-                    <Link href="https://mantine.dev/core/action-icon/">
-                        <MapPin />
-                    </Link>
+                        <Link href="https://mantine.dev/core/action-icon/">
+                            <Group>
+                                <MapPin />
+                            
+                                <div className="hotbar__title">Study Space Finder</div>
+                            </Group>
+                        </Link>
                     <Space h="xs" />
                 </Box>
             </div>

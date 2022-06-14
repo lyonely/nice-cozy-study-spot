@@ -12,6 +12,7 @@ model locations {
   time_closed   DateTime        @db.Time(6)
   name          String          @db.VarChar
   index         Int             @id(map: "locations_pk")
+  picture       String?         @db.VarChar
   sub_locations sub_locations[]
 
   @@unique([name, index], map: "locations_un")

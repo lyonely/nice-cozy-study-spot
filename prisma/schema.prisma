@@ -36,6 +36,7 @@ model sub_locations {
   silent_study_available   Boolean   @default(false)
   breakout_space_available Boolean   @default(false)
   height_adjustable_desks  Boolean   @default(false)
+  trend_capacity           Json?     @db.Json
   locations                locations @relation(fields: [parent_index], references: [index], onDelete: NoAction, onUpdate: NoAction, map: "sub_locations_fk")
 
   @@unique([name, index], map: "sub_locations_un")

@@ -1,7 +1,6 @@
 import { Container, Space, Button } from '@mantine/core'
 import RoundPaper from '../components/RoundPaper'
 import Link from 'next/link'
-import CapacityGraph from './CapacityGraph'
 
 export default function LandingPage() {
     const mainContent = () => {

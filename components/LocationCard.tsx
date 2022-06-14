@@ -11,6 +11,7 @@ import { useState } from 'react'
 import { AppTheme } from '../style/AppTheme'
 import SubStudySpaces from './substudyspaces'
 import Link from 'next/link'
+import CapacityBar from './CapacityBar'
 
 export default function LocationCard({ imgPath, name, sub_locations }) {
     const useStyles = createStyles((theme) => ({
@@ -19,6 +20,10 @@ export default function LocationCard({ imgPath, name, sub_locations }) {
         },
     }))
     const { classes } = useStyles()
+
+    const min = Math.ceil(0)
+    const max = Math.floor(100)
+    const capacity = Math.floor(Math.random() * (max - min) + min)
 
     return (
         <Card
@@ -49,9 +54,7 @@ export default function LocationCard({ imgPath, name, sub_locations }) {
             <Link href={name} passHref>
                 <Group position="apart" style={{ marginTop: '1em' }}>
                     <Text weight={500}>{name}</Text>
-                    <Badge color="pink" variant="light">
-                        Capacity: 90%
-                    </Badge>
+                    <CapacityBar capacity={capacity} />
                 </Group>
             </Link>
             <Accordion classNames={classes}>

@@ -8,12 +8,25 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 		await prisma.locations.findMany({
 			include: {
 				sub_locations: true
+
 			},
 			where: {
-				name: {
-					contains: term,
-					mode: 'insensitive'
-				}
+				OR: [
+					{
+						name: {
+							contains: term,
+							mode: 'insensitive'
+						}
+					}, {
+						sub_locations: {
+							some: {
+								name: {
+									contains: term,
+									mode: 'insensitive'
+								}
+							}
+						}
+					}]
 			}
 		}))
 }

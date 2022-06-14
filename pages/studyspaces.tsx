@@ -15,15 +15,10 @@ export default function Locations() {
 	}, [data])
 
 	return (<div className="bg">
-        <MantineProvider theme={AppTheme} withGlobalStyles withNormalizeCSS >
-
-        <TopBar />
 
 		{error ? "Error occured, please refresh the page" : data ?
 			<StudySpaceList studyspaces={data} />
 			: "Loading..."}
-        </MantineProvider>
-
 	</div>
 	)
 }

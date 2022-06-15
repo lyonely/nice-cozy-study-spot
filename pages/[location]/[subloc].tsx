@@ -27,8 +27,9 @@ export default function SubLocation() {
         <div>
             {data && sublocation ? (
                 <>
-                    <p>{subloc}</p>
                     <Container>
+                        <p>{subloc}</p>
+
                         <p>Daily capacity</p>
                         <CapacityGraph
                             datapoints={sublocation.trend_capacity}

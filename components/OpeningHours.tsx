@@ -18,6 +18,8 @@ import { isGeneratorObject } from 'util/types'
 import { AppTheme } from '../style/AppTheme'
 import { fetcher } from '../utils/fetcher'
 
+
+
 // Opening hours chart
 export default function OpeningHours({ location }) {
 	const days = [

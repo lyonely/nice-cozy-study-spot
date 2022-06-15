@@ -72,12 +72,26 @@ export default function LocationPageCard({ location }) {
 
 
 // Functions for Opening Status of a location (not applicable to sub-locations)
+// Note: Mantine accordion can only have content of type Accordion.Item
+// So functions that actually return AccordionItem will not be listed
+interface AccordionLabelProps {
+	label: string;
+	status: string;
+}
 
-function AccordionLabel({ label, status }) {
+function AccordionLabel({ label, status }: AccordionLabelProps) {
+	let color;
+	switch (status) {
+		case "Open":
+			color = "green";
+			break;
+		case "Closed": color = "red"; break;
+		case "Closing Soon": color = "orange"; break;
+	}
 	return (
 		<div>
 			<Text>{label}</Text>
-			<Text size="sm" color="dimmed" weight={400}>
+			<Text size="sm" color={color} weight={400}>
 				{status}
 			</Text>
 		</div>

@@ -4,6 +4,8 @@ import Link from 'next/link'
 import CapacityBar from './CapacityBar'
 import { locationCapacity } from '../utils/capacity'
 import OpeningHours from './OpeningHours'
+import OpeningHoursAccordionItem from './OpeningHours'
+import moment from 'moment'
 
 export default function LocationPageCard({ location }) {
 	const { url, name, sub_locations } = location
@@ -52,10 +54,11 @@ export default function LocationPageCard({ location }) {
 				/>
 			</Group>
 			<Accordion offsetIcon={false}>
-				<Accordion.Item label="Opening Hours">
 
+				<Accordion.Item label={<AccordionLabel label={name} status={OpeningStatus({ location })} />}>
 					<OpeningHours location={location} />
-				</Accordion.Item>
+				</Accordion.Item >
+
 				<Accordion.Item label="Capacities">
 					<SubStudySpaces
 						location={name}
@@ -63,6 +66,43 @@ export default function LocationPageCard({ location }) {
 					/>
 				</Accordion.Item>
 			</Accordion>
-		</Card>
+		</Card >
 	)
+}
+
+
+// Functions for Opening Status of a location (not applicable to sub-locations)
+
+function AccordionLabel({ label, status }) {
+	return (
+		<div>
+			<Text>{label}</Text>
+			<Text size="sm" color="dimmed" weight={400}>
+				{status}
+			</Text>
+		</div>
+	);
+}
+
+function OpeningStatus({ location }) {
+	const { time_open, time_closed } = location
+
+	// Displays "open", "closes" or "closes soon" (if location closes within an hour)
+	const openingTime = parseInt(moment(time_open).format('HH'));
+	const closingTime = parseInt(moment(time_closed).format('HH'));
+
+	var current = new Date();
+	var currentHour = current.getHours();
+
+	let status;
+
+	if (openingTime <= currentHour && currentHour < closingTime) {
+		status = "Open";
+	} else if (currentHour == 11 && closingTime == 12 || currentHour == closingTime - 1) {
+		status = "Closing Soon";
+	} else {
+		status = "Closed";
+	}
+
+	return status;
 }

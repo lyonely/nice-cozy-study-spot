@@ -9,17 +9,16 @@ import {
 	createStyles,
 	CardSection,
 } from '@mantine/core'
+import { time } from 'console'
 import moment from 'moment'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import useSWR from 'swr'
+import { isGeneratorObject } from 'util/types'
 import { AppTheme } from '../style/AppTheme'
 import { fetcher } from '../utils/fetcher'
 
-
-
-
-
+// Opening hours chart
 export default function OpeningHours({ location }) {
 	const days = [
 		'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'

@@ -1,9 +1,7 @@
-import { Group, Container } from '@mantine/core'
+import { Container } from '@mantine/core'
 import LocationCard from './LocationCard'
 import SearchBar from './SearchBar'
 import { useState, useEffect } from 'react'
-import useSWR from 'swr'
-import { fetcher } from '../utils/fetcher'
 
 export default function StudySpaceList() {
 	const [term, setTerm] = useState('')

@@ -1,14 +1,10 @@
-import { Group, Container } from "@mantine/core"
+import { Container } from '@mantine/core'
 import LocationCard from './LocationCard'
-import SearchBar from "./SearchBar"
-import { useState, useEffect } from "react"
-import useSWR from "swr"
-import { fetcher } from "../utils/fetcher"
-
+import SearchBar from './SearchBar'
+import { useState, useEffect } from 'react'
 
 export default function StudySpaceList() {
-
-	const [term, setTerm] = useState("")
+	const [term, setTerm] = useState('')
 	const [data, setData] = useState<any[]>()
 
 	const fetchLocations = async () => {
@@ -29,9 +25,14 @@ export default function StudySpaceList() {
 	return (
 		<Container>
 			<SearchBar setTerm={setTerm} />
-			{data ? data.map(location => (
-				<LocationCard name={location.name} imgPath="" sub_locations={location.sub_locations} />)
-			) : "Loading..."}
+			{data
+				? data.map((location) => (
+					<LocationCard
+						location={location}
+						key={location.name}
+					/>
+				))
+				: 'Loading...'}
 		</Container>
 	)
 }

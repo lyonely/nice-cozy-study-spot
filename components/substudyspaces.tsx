@@ -1,43 +1,29 @@
-import Link from "next/link";
-import { Badge, Group, Text, Button, Container } from "@mantine/core"
+import Link from 'next/link'
+import { Text, Button } from '@mantine/core'
+import CapacityBar from './CapacityBar'
+import { capacity } from '../utils/capacity'
 
-export default function SubStudySpaces({ location, subareas }) {
+export default function SubStudySpaces({ location, sub_locations }) {
+	return sub_locations.map((sub) => {
+		const curr = parseInt(sub.capacity)
+		const max = parseInt(sub.max_capacity)
 
-	const badgeGenerator = (capacity) => {
-		if (capacity > 80) {
-			return <Badge color="pink" variant="light">
-				Capacity: {capacity}
-			</Badge>
-		} else if (capacity > 50) {
-			return <Badge color="orange" variant="light">
-				Capacity: {capacity}
-			</Badge>
-		} else {
-			return <Badge color="green" variant="light">
-				Capacity: {capacity}
-			</Badge>
-		}
-	}
-	return (
-		subareas.map(subarea => {
+		return (
+			<Link href={`/${location}/${sub.name}`}>
+				<Button
+					classNames={{ inner: "sublocation__button", label: "sublocation__label" }}
+					fullWidth
+					variant="light"
+					color="yellow"
+					style={{ height: "auto", marginBottom: "0.25em", padding: "0.25em", color: "black" }}>
+					<Text align="center" style={{ width: '100%' }} weight={500}>
+						{sub.name}
+					</Text>
 
-			const min = Math.ceil(0);
-			const max = Math.floor(100);
-			const capacity = Math.floor(Math.random() * (max - min) + min);
+					<CapacityBar capacity={capacity(curr, max)} isSubLocation={true} />
+				</Button>
 
-			return (<Group>
-				<Link href={`/${location}/${subarea.name}`} >
-					<Button variant="light" color="yellow" fullWidth style={{ height: "auto", marginBottom: "0.25em", padding: "0.25em", color: "black" }}>
-						<Container>
-							<Text align="left" style={{ width: "50%" }} weight={500}>
-								{subarea.name}</Text>
-							{badgeGenerator(capacity)}
-						</Container>
-					</Button>
-
-				</Link >
-			</Group>
-			)
-		})
-	)
+			</Link>
+		)
+	})
 }

@@ -1,43 +1,57 @@
-import { Card, Image, Text, Group, Badge, Accordion, createStyles } from '@mantine/core'
-import { useState } from 'react'
-import { AppTheme } from '../style/AppTheme';
-import SubStudySpaces from './substudyspaces';
+import {
+	Card,
+	Image,
+	Text,
+	Group,
+	Accordion,
+} from '@mantine/core'
+import SubStudySpaces from './substudyspaces'
 import Link from 'next/link'
+import CapacityBar from './CapacityBar'
+import { capacity } from '../utils/capacity'
 
-export default function LocationCard({ imgPath, name, sub_locations }) {
-	const useStyles = createStyles((theme) => ({
-		content: {
-			paddingLeft: 0
-		}
-	}))
-	const { classes } = useStyles()
+export default function LocationCard({ location }) {
+	const { url, name, sub_locations } = location
+	const locationMax = sub_locations.reduce((acc: number, { max_capacity }) => acc + parseInt(max_capacity), 0);
+	const locationCurr = sub_locations.reduce((acc, { capacity }) => acc + parseInt(capacity), 0);
 
 	return (
-		<Card shadow="sm" radius="lg" p="md" withBorder style={{
-			margin: "1.5em 0.5em 1.5em 0.5em"
-		}}>
+		<Card
+			shadow="sm"
+			radius="lg"
+			p="md"
+			withBorder
+			style={{
+				margin: '1.5em 0.5em 1.5em 0.5em',
+			}}
+		>
 			<Card.Section>
 				<Link href={name} passHref>
-					<Image height={160} src={imgPath} alt={name} withPlaceholder
+					<Image
+						height={160}
+						src={url}
+						alt={name}
+						withPlaceholder
 						placeholder={
-							<Image height={160} src="https://www.imperial.ac.uk/media/migration/administration-and-support-services/library-3--tojpeg_1550242474436_x2.jpg"></Image>
-						} />
-
+							<Image
+								height={160}
+								src="https://www.imperial.ac.uk/media/migration/administration-and-support-services/library-3--tojpeg_1550242474436_x2.jpg"
+							></Image>
+						}
+					/>
 				</Link>
 			</Card.Section>
 			<Link href={name} passHref>
-				<Group position="apart" style={{ marginTop: "1em" }}>
+				<Group position="apart" style={{ marginTop: '1em' }}>
 					<Text weight={500}>{name}</Text>
-					<Badge color="pink" variant="light">
-						Capacity: 90%
-					</Badge>
+					<CapacityBar capacity={capacity(locationCurr, locationMax)} isSubLocation={false} />
 				</Group>
 			</Link>
-			<Accordion classNames={classes}>
+			<Accordion offsetIcon={false}>
 				<Accordion.Item label="Details">
-					<SubStudySpaces location={name} subareas={sub_locations} />
+					<SubStudySpaces location={name} sub_locations={sub_locations} />
 				</Accordion.Item>
 			</Accordion>
-		</Card >
+		</Card>
 	)
 }

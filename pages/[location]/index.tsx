@@ -17,7 +17,7 @@ export default function Location() {
 					<p>Opening Times:</p>
 					<p>{moment(data.time_open).format('dddd HH')}</p>
 					<p>{moment(data.time_closed).format('dddd HH')}</p>
-					<SubStudySpaces location={location} subareas={data.sub_locations} />
+					<SubStudySpaces location={location} sub_locations={data.sub_locations} />
 				</>) : <p>"Loading..."</p>}
 		</div>
 	)

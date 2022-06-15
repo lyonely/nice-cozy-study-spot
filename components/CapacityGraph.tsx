@@ -61,7 +61,8 @@ export default function CapacityGraph({ datapoints }) {
         }
     }
 
-    const labels = [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21]
+    const labels = Object.keys(datapoints)
+    const values = Object.values(datapoints)
 
     const data = () => {
         return {
@@ -69,10 +70,7 @@ export default function CapacityGraph({ datapoints }) {
             datasets: [
                 {
                     label: 'Capacity',
-                    data: labels.map((i) => {
-                        return (i % 4) + 1
-                    }),
-                    //borderSkipped: 'false',
+                    data: values,
                     backgroundColor: barColor(),
                     borderColor: outlineColor(),
                     borderWidth: 2,

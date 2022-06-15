@@ -28,7 +28,6 @@ export default function SubLocation() {
             {data && sublocation ? (
                 <>
                     <p>{subloc}</p>
-                    <p>{sublocation.trend_capacity}</p>
                     <CapacityGraph datapoints={sublocation.trend_capacity} />
                 </>
             ) : (

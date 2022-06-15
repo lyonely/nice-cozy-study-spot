@@ -11,7 +11,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 		<div>
 
 			<Head>
-				<title>Imperial Study Spaces</title>
+				<title>Imperial Study Spaces!!!</title>
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<MantineProvider theme={AppTheme} withGlobalStyles withNormalizeCSS >

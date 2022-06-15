@@ -13,6 +13,8 @@ model locations {
   name          String          @db.VarChar
   index         Int             @id(map: "locations_pk")
   picture       String?         @db.VarChar
+  directions    String          @default("Use google maps")
+  description   String?
   sub_locations sub_locations[]
 
   @@unique([name, index], map: "locations_un")

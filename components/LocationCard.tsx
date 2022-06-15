@@ -3,7 +3,6 @@ import SubStudySpaces from './substudyspaces'
 import Link from 'next/link'
 import CapacityBar from './CapacityBar'
 import { capacity } from '../utils/capacity'
-import SubStudySpaces2 from './SubStudySpaces2'
 
 export default function LocationCard({ location }) {
     const { url, name, sub_locations } = location
@@ -64,14 +63,8 @@ export default function LocationCard({ location }) {
                 </Group>
             </Link>
             <Accordion offsetIcon={false}>
-                <Accordion.Item label="Details (Style 1)">
+                <Accordion.Item label="Details">
                     <SubStudySpaces
-                        location={name}
-                        sub_locations={sub_locations}
-                    />
-                </Accordion.Item>
-                <Accordion.Item label="Details (Style 2)">
-                    <SubStudySpaces2
                         location={name}
                         sub_locations={sub_locations}
                     />

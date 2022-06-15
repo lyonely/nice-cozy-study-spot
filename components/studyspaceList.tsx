@@ -1,27 +1,38 @@
-import SubStudySpaces from "./substudyspaces";
-import Link from 'next/link'
-import { useState } from 'react'
-import { ChevronDown, ChevronUp } from "react-feather";
+import { Container } from '@mantine/core'
+import LocationCard from './LocationCard'
+import SearchBar from './SearchBar'
+import { useState, useEffect } from 'react'
 
-export default function StudySpaceList({ studyspaces }) {
-	const [showsub, setShowsub] = useState(false)
+export default function StudySpaceList() {
+	const [term, setTerm] = useState('')
+	const [data, setData] = useState<any[]>()
 
-	const handleShowSub = () => {
-		setShowsub(!showsub)
+	const fetchLocations = async () => {
+		const resp = await fetch(`/api/locations?term=${term}`)
+		setData(await resp.json())
 	}
 
-	return (
-		<div>
-			{studyspaces.map(location => (
-				<div>
-					<Link href={`${location.name}`}>{location.name}</Link>
-					{showsub ? <ChevronUp onClick={handleShowSub} /> : <ChevronDown onClick={handleShowSub} />}
+	useEffect(() => {
+		console.log(data)
+	}, [data])
 
-					{showsub && <><p>Subareas:</p>
-						<SubStudySpaces location={location.name} subareas={location.sub_locations} />
-					</>}
-				</div>)
-			)}
-		</div>
+	useEffect(() => {
+		fetchLocations()
+		if (term) {
+			console.log(term)
+		}
+	}, [term])
+	return (
+		<Container>
+			<SearchBar setTerm={setTerm} />
+			{data
+				? data.map((location) => (
+					<LocationCard
+						location={location}
+						key={location.name}
+					/>
+				))
+				: 'Loading...'}
+		</Container>
 	)
 }

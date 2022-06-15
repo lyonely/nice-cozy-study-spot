@@ -3,17 +3,12 @@ import { fetcher } from "../utils/fetcher"
 import useSWR from 'swr'
 import StudySpaceList from '../components/studyspaceList'
 
+
 export default function Locations() {
-	const { data, error } = useSWR('/api/locations', fetcher)
 
-	useEffect(() => {
-		console.log(data)
-	}, [data])
+	return (<div className="bg">
 
-	return (<div>
-		{error ? "Error occured, please refresh the page" : data ?
-			<StudySpaceList studyspaces={data} />
-			: "Loading..."}
+		<StudySpaceList />
 	</div>
 	)
 }

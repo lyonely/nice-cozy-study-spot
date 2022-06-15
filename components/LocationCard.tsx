@@ -14,31 +14,14 @@ export default function LocationCard({ location }) {
 			p="md"
 			withBorder
 			style={{
-				margin: '1.5em 0.5em 1.5em 0.5em',
+				margin: '0.75em 0.5em 0.75em 0.5em',
 			}}
 		>
-			<Card.Section>
-				<Link href={name} passHref>
-					<Image
-						height={160}
-						src={url}
-						alt={name}
-						withPlaceholder
-						placeholder={
-							<Image
-								height={160}
-								src="https://www.imperial.ac.uk/media/migration/administration-and-support-services/library-3--tojpeg_1550242474436_x2.jpg"
-							></Image>
-						}
-					/>
-				</Link>
-			</Card.Section>
 			<Link href={name} passHref>
 				<Group
 					position="apart"
 					direction="column"
 					spacing="xs"
-					style={{ marginTop: '1em' }}
 				>
 					<Text weight={500}>{name}</Text>
 					<Text

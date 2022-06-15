@@ -2,5 +2,17 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import prisma from '../../lib/prisma'
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-	res.status(200).json(await prisma.sub_locations.findMany())
+	const term: string = req.query.term as string
+	const resp = await prisma.sub_locations.findMany({
+		include: {
+			locations: true
+		},
+		where: {
+			name: {
+				contains: term,
+				mode: 'insensitive'
+			}
+		}
+	})
+	res.status(200).json(resp)
 }

@@ -1,0 +1,1 @@
+export const capacity = (cur, max) => cur / max * 100

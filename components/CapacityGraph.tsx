@@ -12,7 +12,7 @@ import { Bar } from 'react-chartjs-2'
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 
-export default function CapacityGraph() {
+export default function CapacityGraph({ datapoints }) {
     const outlineColor = () => {
         return 'rgba(0, 0, 0, 255)'
     }

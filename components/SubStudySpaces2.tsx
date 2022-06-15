@@ -1,9 +1,9 @@
 import Link from 'next/link'
 import { Text, Button } from '@mantine/core'
-import CapacityBar from './CapacityBar'
 import { capacity } from '../utils/capacity'
+import CapacityBar2 from './CapacityBar2'
 
-export default function SubStudySpaces({ location, sub_locations }) {
+export default function SubStudySpaces2({ location, sub_locations }) {
     return sub_locations.map((sub) => {
         const curr = parseInt(sub.capacity)
         const max = parseInt(sub.max_capacity)
@@ -29,7 +29,7 @@ export default function SubStudySpaces({ location, sub_locations }) {
                         {sub.name}
                     </Text>
 
-                    <CapacityBar
+                    <CapacityBar2
                         capacity={capacity(curr, max)}
                         isSubLocation={true}
                     />

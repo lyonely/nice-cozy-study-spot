@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import useSWR from "swr";
 import { fetcher } from "../../utils/fetcher";
 import moment from 'moment'
+import OpeningHours from "../../components/OpeningHours";
 
 export default function Location() {
 	const router = useRouter()
@@ -14,10 +15,8 @@ export default function Location() {
 			{data ? (
 				<>
 					<p>{data.name}</p>
-					<p>Opening Times:</p>
-					<p>{moment(data.time_open).format('dddd HH')}</p>
-					<p>{moment(data.time_closed).format('dddd HH')}</p>
-					<SubStudySpaces location={location} sub_locations={data.sub_locations} />
+					<OpeningHours></OpeningHours>
+					<SubStudySpaces location={location} subareas={data.sub_locations} />
 				</>) : <p>"Loading..."</p>}
 		</div>
 	)

@@ -9,7 +9,7 @@ export default function LandingPage() {
                 <div className="landing__title">Welcome!</div>
                 <p className="landing__desc">
                     {' '}
-                    Let us help you find good study spaces.
+                    Let us help you find good study spaces!!.
                 </p>
                 <div className="landing__button">
                     <Link href="/studyspaces">

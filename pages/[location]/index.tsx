@@ -1,9 +1,8 @@
-import SubStudySpaces from "../../components/substudyspaces";
 import { useRouter } from 'next/router'
 import useSWR from "swr";
 import { fetcher } from "../../utils/fetcher";
-import moment from 'moment'
-import OpeningHours from "../../components/OpeningHours";
+import LocationPageCard from "../../components/LocationPageCard";
+import { Container } from "@mantine/core";
 
 export default function Location() {
 	const router = useRouter()
@@ -11,13 +10,9 @@ export default function Location() {
 	const { data, error } = useSWR(`/api/${location}`, fetcher)
 
 	return (
-		<div>
+		<Container>
 			{data ? (
-				<>
-					<p>{data.name}</p>
-					<OpeningHours></OpeningHours>
-					<SubStudySpaces location={location} subareas={data.sub_locations} />
-				</>) : <p>"Loading..."</p>}
-		</div>
+				<LocationPageCard location={data} />) : <p>Loading...</p>}
+		</Container>
 	)
 }

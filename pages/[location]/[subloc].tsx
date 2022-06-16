@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react'
 import { Accordion, Card, Text, Divider, Group, List, ThemeIcon, Title } from '@mantine/core'
 import CapacityBar from '../../components/CapacityBar'
 import CapacityTag from '../../components/CapacityTag'
-import { CircleCheck, CircleDashed, CircleOff, FileDescription, Pencil, PointOff, Space } from 'tabler-icons-react';
+import { Armchair, CircleCheck, CircleDashed, CircleOff, FileDescription, Pencil, PointOff, Space } from 'tabler-icons-react';
 
 export default function SubLocation() {
     const router = useRouter()
@@ -75,7 +75,16 @@ export default function SubLocation() {
                                             <Pencil size={20} />
                                         </ThemeIcon>}
                                 >
-                                    {subLocationAmenities(data)}
+                                    {subLocAmenities(data)}
+                                </Accordion.Item>
+                                <Accordion.Item
+                                    label="Types of Study Spaces"
+                                    icon={
+                                        <ThemeIcon color="brown" variant="light" radius="xl">
+                                            <Armchair size={20} />
+                                        </ThemeIcon>}
+                                >
+                                    {subLocStudySpaces(data)}
                                 </Accordion.Item>
                             </Accordion>
                         </>
@@ -89,14 +98,13 @@ export default function SubLocation() {
 }
 
 
-function subLocationAmenities(sublocation) {
+function subLocAmenities(sublocation) {
 
     // Extract amenities into map
     const { toilets_nearby, microwave, monitor, plug_sockets, printer, whiteboard, height_adjustable_desks } = sublocation;
 
     return (
         <div>
-            <Divider my="sm" />
             <List
                 spacing="xs"
                 size="sm"
@@ -127,4 +135,26 @@ function listIcon(available) {
             <CircleOff size={16} />
         </ThemeIcon>);
     }
+}
+
+function subLocStudySpaces(sublocation) {
+    const { group_study_available, silent_study_available, breakout_space_available, quiet_study_available } = sublocation
+
+    const spaceMap = new Map();
+
+    return (
+        <div>
+            <List
+                spacing="xs"
+                size="sm"
+                center
+            >
+                <List.Item icon={listIcon(breakout_space_available)}>Breakout Space Available</List.Item>
+                <List.Item icon={listIcon(silent_study_available)}>Silent Study Available</List.Item>
+                <List.Item icon={listIcon(quiet_study_available)}>Quiet Study Available</List.Item>
+                <List.Item icon={listIcon(group_study_available)}>Group Study Available</List.Item>
+
+            </List>
+        </div>
+    )
 }

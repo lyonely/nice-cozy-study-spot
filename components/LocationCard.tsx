@@ -37,7 +37,7 @@ export default function LocationListCard({ location }) {
 					/>
 				</Group>
 			</Link>
-			<Accordion offsetIcon={false} shadows="xs">
+			<Accordion offsetIcon={false}>
 				<Accordion.Item label="Details" >
 					<SubStudySpaces
 						location={name}

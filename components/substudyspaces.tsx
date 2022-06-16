@@ -1,7 +1,5 @@
 import Link from 'next/link'
 import { Text, Button, Group } from '@mantine/core'
-import CapacityBar from './CapacityBar'
-import { subCapacity } from '../utils/capacity'
 import CapacityTag from './CapacityTag'
 
 export default function SubStudySpaces({ location, sub_locations }) {
@@ -22,11 +20,11 @@ export default function SubStudySpaces({ location, sub_locations }) {
                     style={{
                         height: 'auto',
                         marginBottom: '0.25em',
-                        padding: '0.25em',
+                        padding: '0.25em 0.75em 0.25em 0.75em',
                         color: 'black',
                     }}
                 >
-                    <Text style={{ width: '60%' }} weight={500}>
+                    <Text style={{ maxWidth: 'max-content' }} weight={500}>
                         {sub.name}
                     </Text>
 

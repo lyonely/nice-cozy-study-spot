@@ -4,8 +4,8 @@ import Link from 'next/link'
 import CapacityBar from './CapacityBar'
 import { locationCapacity } from '../utils/capacity'
 
-export default function LocationCard({ location }) {
-	const { url, name, sub_locations } = location
+export default function LocationListCard({ location }) {
+	const { name, sub_locations } = location
 
 	return (
 		<Card

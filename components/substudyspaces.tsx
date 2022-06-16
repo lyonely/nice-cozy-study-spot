@@ -1,7 +1,8 @@
 import Link from 'next/link'
-import { Text, Button } from '@mantine/core'
+import { Text, Button, Group } from '@mantine/core'
 import CapacityBar from './CapacityBar'
 import { subCapacity } from '../utils/capacity'
+import CapacityTag from './CapacityTag'
 
 export default function SubStudySpaces({ location, sub_locations }) {
     return sub_locations.map((sub) => {
@@ -25,13 +26,13 @@ export default function SubStudySpaces({ location, sub_locations }) {
                         color: 'black',
                     }}
                 >
-                    <Text align="center" style={{ width: '100%' }} weight={500}>
+                    <Text style={{ width: '60%' }} weight={500}>
                         {sub.name}
                     </Text>
 
-                    <CapacityBar
-                        capacity={subCapacity(sub)}
-                        isSubLocation={true}
+                    <CapacityTag
+                        current={sub.capacity}
+                        max={sub.max_capacity}
                     />
                 </Button>
             </Link>

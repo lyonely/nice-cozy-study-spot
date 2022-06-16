@@ -9,7 +9,7 @@ export default function SearchBar({ setTerm }) {
 			radius="md"
 			placeholder="Search Study Location"
 			icon={<Search size={14} />}
-			style={{ margin: "1.5em 0.5em" }}
+			style={{ margin: "0.75em 0.5em 0.5em 0.5em" }}
 		/>
 	);
 }

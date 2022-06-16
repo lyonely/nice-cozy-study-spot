@@ -3,10 +3,9 @@ import CapacityGraph from '../../components/CapacityGraph'
 import useSWR from 'swr'
 import { fetcher } from '../../utils/fetcher'
 import { useEffect, useState } from 'react'
-import { Accordion, Card, Text, Divider, Group, List, ThemeIcon, Title } from '@mantine/core'
-import CapacityBar from '../../components/CapacityBar'
+import { Accordion, Card, Text, Group, List, ThemeIcon, Title, Alert } from '@mantine/core'
 import CapacityTag from '../../components/CapacityTag'
-import { Armchair, CircleCheck, CircleDashed, CircleOff, FileDescription, Pencil, PointOff, Space } from 'tabler-icons-react';
+import { AlertCircle, Armchair, CircleCheck, CircleOff, FileDescription, Pencil, Space } from 'tabler-icons-react';
 
 export default function SubLocation() {
     const router = useRouter()
@@ -55,9 +54,10 @@ export default function SubLocation() {
                                 <CapacityGraph
                                     datapoints={data.trend_capacity}
                                 />
-
-
                             </Group>
+
+                            {cardAccessNeeded(data.card_access_needed)}
+
                             <Accordion offsetIcon={false}>
                                 <Accordion.Item
                                     label="Description"
@@ -80,7 +80,7 @@ export default function SubLocation() {
                                 <Accordion.Item
                                     label="Types of Study Spaces"
                                     icon={
-                                        <ThemeIcon color="brown" variant="light" radius="xl">
+                                        <ThemeIcon color="beige" variant="light" radius="xl">
                                             <Armchair size={20} />
                                         </ThemeIcon>}
                                 >
@@ -95,6 +95,17 @@ export default function SubLocation() {
             </div>
         </div>
     )
+}
+
+function cardAccessNeeded(cardAccess) {
+    if (cardAccess) {
+        return (
+            <Alert mt="md" mb="md" icon={<AlertCircle size={16} />} title="Card Access Required" color="red">
+                A staff or departmental card is needed to access this space.
+            </Alert>
+        );
+
+    }
 }
 
 

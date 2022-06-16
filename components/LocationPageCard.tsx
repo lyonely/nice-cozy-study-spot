@@ -4,6 +4,8 @@ import Link from 'next/link'
 import CapacityBar from './CapacityBar'
 import { locationCapacity } from '../utils/capacity'
 import OpeningHours from './OpeningHours'
+import OpeningHoursAccordionItem from './OpeningHours'
+import moment from 'moment'
 
 export default function LocationPageCard({ location }) {
 	const { url, name, sub_locations } = location
@@ -52,10 +54,11 @@ export default function LocationPageCard({ location }) {
 				/>
 			</Group>
 			<Accordion offsetIcon={false}>
-				<Accordion.Item label="Opening Hours">
 
+				<Accordion.Item label={<AccordionLabel label={name} status={OpeningStatus({ location })} />}>
 					<OpeningHours location={location} />
-				</Accordion.Item>
+				</Accordion.Item >
+
 				<Accordion.Item label="Capacities">
 					<SubStudySpaces
 						location={name}
@@ -63,6 +66,61 @@ export default function LocationPageCard({ location }) {
 					/>
 				</Accordion.Item>
 			</Accordion>
-		</Card>
+		</Card >
 	)
+}
+
+
+// Functions for Opening Status of a location (not applicable to sub-locations)
+// Note: Mantine accordion can only have content of type Accordion.Item
+// So functions that actually return AccordionItem will not be listed
+interface AccordionLabelProps {
+	label: string;
+	status: string;
+}
+
+function AccordionLabel({ label, status }: AccordionLabelProps) {
+	let color;
+	switch (status) {
+		case "Open 24 Hours":
+		case "Open":
+			color = "green";
+			break;
+		case "Closed": color = "red"; break;
+		case "Closing Soon": color = "orange"; break;
+	}
+	return (
+		<div>
+			<Text>{label}</Text>
+			<Text size="sm" color={color} weight={400}>
+				{status}
+			</Text>
+		</div>
+	);
+}
+
+function OpeningStatus({ location }) {
+	const { time_open, time_closed } = location
+
+	// Displays "open", "closes" or "closes soon" (if location closes within an hour)
+	let openingTime = parseInt(moment(time_open).format('HH'));
+	let closingTime = parseInt(moment(time_closed).format('HH'));
+
+	var current = new Date();
+	var currentHour = current.getHours();
+
+	let status;
+
+	if (openingTime == closingTime) {
+		status = "Open 24 Hours"
+	} else if (currentHour < openingTime && currentHour + 24 >= closingTime) {
+		status = "Closed";
+	} else if (currentHour > openingTime && closingTime > openingTime && currentHour >= closingTime) {
+		status = "Closed";
+	} else if (currentHour == closingTime - 1 || closingTime == 0 && currentHour == 23) {
+		status = "Closing Soon"
+	} else {
+		status = "Open"
+	}
+	return status;
 }

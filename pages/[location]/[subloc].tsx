@@ -5,12 +5,8 @@ import { fetcher } from '../../utils/fetcher'
 import { useEffect, useState } from 'react'
 import { Accordion, Card, Text, Divider, Group, List, ThemeIcon, Title } from '@mantine/core'
 import CapacityTag from '../../components/CapacityTag'
-<<<<<<< HEAD
-import { CircleCheck, CircleOff, Container, FileDescription, Pencil } from 'tabler-icons-react';
+import { Armchair, CircleCheck, CircleOff, Container, FileDescription, Pencil } from 'tabler-icons-react';
 import BackButton from '../../components/BackButton'
-=======
-import { Armchair, CircleCheck, CircleDashed, CircleOff, FileDescription, Pencil, PointOff, Space } from 'tabler-icons-react';
->>>>>>> 993b13d (feat: added list of study spaces in sublocation cards)
 
 export default function SubLocation() {
     const router = useRouter()
@@ -99,8 +95,6 @@ export default function SubLocation() {
                 </Card>
             </div>
         </Container>
-    ) : (
-        <p>Loading...</p>
     )
 }
 

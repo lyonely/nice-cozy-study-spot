@@ -3,6 +3,7 @@ import SubStudySpaces from './substudyspaces'
 import Link from 'next/link'
 import CapacityBar from './CapacityBar'
 import { locationCapacity } from '../utils/capacity'
+import { Books, BuildingArch, BuildingCommunity, Flower, School, Trees } from 'tabler-icons-react'
 
 export default function LocationListCard({ location }) {
 	const { name, sub_locations } = location
@@ -23,7 +24,11 @@ export default function LocationListCard({ location }) {
 					direction="column"
 					spacing="xs"
 				>
-					<Text weight={500}>{name}</Text>
+					<Group>
+						{getIcon(name)}
+						<Text weight={500}>{name}</Text>
+					</Group>
+
 					<Text
 						size="sm"
 						color="gray"
@@ -38,7 +43,7 @@ export default function LocationListCard({ location }) {
 				</Group>
 			</Link>
 			<Accordion offsetIcon={false}>
-				<Accordion.Item label="Details" >
+				<Accordion.Item label="View Study Spaces" >
 					<SubStudySpaces
 						location={name}
 						sub_locations={sub_locations}
@@ -47,4 +52,18 @@ export default function LocationListCard({ location }) {
 			</Accordion>
 		</Card>
 	)
+}
+
+function getIcon(name) {
+	if (name.includes("Library")) {
+		return <Books />
+	} else if (name.includes("Park")) {
+		return <Trees />
+	} else if (name.includes("School")) {
+		return <School />
+	} else if (name.includes("Lawn")) {
+		return <Flower />
+	} else {
+		return <BuildingCommunity />
+	}
 }

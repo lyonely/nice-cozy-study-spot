@@ -1,22 +1,7 @@
 import {
-	Card,
-	Image,
 	Text,
-	Group,
-	Badge,
-	Accordion,
-	Box,
-	createStyles,
-	CardSection,
 } from '@mantine/core'
-import { time } from 'console'
 import moment from 'moment'
-import { useRouter } from 'next/router'
-import { useState } from 'react'
-import useSWR from 'swr'
-import { isGeneratorObject } from 'util/types'
-import { AppTheme } from '../style/AppTheme'
-import { fetcher } from '../utils/fetcher'
 
 
 

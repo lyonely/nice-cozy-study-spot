@@ -1,20 +1,25 @@
 import { TextInput } from '@mantine/core'
+import { useRef } from 'react';
 import { Search, X } from 'react-feather';
 
 export default function SearchBar({ term, setTerm }) {
+
+	const searchRef = useRef<HTMLInputElement>()
 
 	const ClearSearch = ({ value }) => {
 		console.log("SEARCH")
 		console.log(value)
 		return (<X strokeWidth='xs' color="gray" size="18px" onClick={
-			(e) => {
-				e.preventDefault()
-				setTerm(null)
+			() => {
+				searchRef.current.value = null
+				setTerm([])
 			}} />)
 	}
 
 	return (
-		<TextInput onChange={(event) => { setTerm(event.currentTarget.value) }}
+		<TextInput ref={searchRef} onChange={(event) => {
+			setTerm(event.currentTarget.value)
+		}}
 			type="search"
 			radius="md"
 			placeholder="Search Study Location"

@@ -1,4 +1,4 @@
-const capacity = (curr, max) => (max === 0 ? 0 : (curr / max) * 100)
+export const capacity = (curr, max) => (max === 0 ? 0 : (curr / max) * 100)
 
 export const subCapacity = (sub) => {
     const curr = parseInt(sub.capacity)

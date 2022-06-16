@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { Text, Button, Group } from '@mantine/core'
 import CapacityTag from './CapacityTag'
+import { subCapacity } from '../utils/capacity'
 
 export default function SubStudySpaces({ location, sub_locations }) {
     return sub_locations.map((sub) => {

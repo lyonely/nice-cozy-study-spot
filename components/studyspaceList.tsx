@@ -1,5 +1,5 @@
 import { Container, Text } from '@mantine/core'
-import LocationCard from './LocationCard'
+import LocationListCard from './LocationCard'
 import SearchBar from './SearchBar'
 import { useState, useEffect } from 'react'
 import SubLocationSearchCard from './SubLocationSearchCard'
@@ -39,7 +39,7 @@ export default function StudySpaceList() {
 				&& <>
 					<Text size="xs" align='center' color='gray'>Locations</Text>
 					{data.map((location) => (
-						<LocationCard
+						<LocationListCard
 							location={location}
 							key={location.name}
 						/>

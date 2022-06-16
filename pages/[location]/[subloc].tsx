@@ -3,9 +3,27 @@ import CapacityGraph from '../../components/CapacityGraph'
 import useSWR from 'swr'
 import { fetcher } from '../../utils/fetcher'
 import { useEffect, useState } from 'react'
-import { Accordion, Card, Text, Divider, Group, List, ThemeIcon, Title, Alert } from '@mantine/core'
+import {
+    Accordion,
+    Card,
+    Text,
+    Group,
+    List,
+    ThemeIcon,
+    Alert,
+    Container,
+    Image,
+    Title,
+} from '@mantine/core'
 import CapacityTag from '../../components/CapacityTag'
-import { AlertCircle, Armchair, CircleCheck, CircleOff, Container, FileDescription, Pencil } from 'tabler-icons-react';
+import {
+    AlertCircle,
+    Armchair,
+    CircleCheck,
+    CircleOff,
+    FileDescription,
+    Pencil,
+} from 'tabler-icons-react'
 import BackButton from '../../components/BackButton'
 
 export default function SubLocation() {
@@ -19,10 +37,8 @@ export default function SubLocation() {
         console.log(data)
     }, [data])
 
-
-    return (
-
-        <div>
+    return data ? (
+        <Container>
             <BackButton url={`/${location}`} text={location} />
             <Card
                 shadow="sm"
@@ -33,104 +49,135 @@ export default function SubLocation() {
                     margin: '0.25em 0.5em 1.5em 0.5em',
                 }}
             >
-                {data ? (
-                    <>
-                        <Group
-                            position="apart"
-                            direction="column"
-                            spacing="xs"
-                            style={{ marginTop: '0em' }}
-                        >
-                            <Title order={1}>{subloc}</Title>
+                <Card.Section>
+                    <Image
+                        height={160}
+                        src={data.locations.picture}
+                        alt={data.locations.name}
+                    ></Image>
+                </Card.Section>
+                <Group
+                    position="apart"
+                    direction="column"
+                    spacing="xs"
+                    style={{ marginTop: '1em' }}
+                >
+                    <Text weight={600} size="xl">
+                        {subloc}
+                    </Text>
 
-                            <Group>
-                                <Text weight={500}> Current Capacity: </Text>
-                                <CapacityTag
-                                    current={data.capacity}
-                                    max={data.max_capacity}
-                                />
-                            </Group>
-                        </Group>
-                        <Group style={{ marginTop: '1em' }}>
-                            <Text weight={500}>Daily Capacity Trends</Text>
-                            <CapacityGraph
-                                datapoints={data.trend_capacity}
-                            />
+                    <Group>
+                        <Text size="sm" color="gray">
+                            {' '}
+                            Capacity{' '}
+                        </Text>
+                        <CapacityTag
+                            current={data.capacity}
+                            max={data.max_capacity}
+                        />
+                    </Group>
+                </Group>
+                <Group style={{ marginTop: '1em' }}>
+                    <Text size="sm" color="gray">
+                        Daily Capacity Trends
+                    </Text>
+                    <CapacityGraph datapoints={data.trend_capacity} />
 
-                            {cardAccessNeeded(data.card_access_needed)}
-                        </Group>
-                        <Accordion offsetIcon={false}>
-                            <Accordion.Item
-                                label="Description"
-                                icon={
-                                    <ThemeIcon color="blue" variant="light" radius="xl">
-                                        <FileDescription size={20} />
-                                    </ThemeIcon>}
+                    {cardAccessNeeded(data.card_access_needed)}
+                </Group>
+                <Accordion offsetIcon={false}>
+                    <Accordion.Item
+                        label="Description"
+                        icon={
+                            <ThemeIcon color="blue" variant="light" radius="xl">
+                                <FileDescription size={20} />
+                            </ThemeIcon>
+                        }
+                    >
+                        <Text>{data.description}</Text>
+                    </Accordion.Item>
+                    <Accordion.Item
+                        label="Amenities"
+                        icon={
+                            <ThemeIcon
+                                color="yellow"
+                                variant="light"
+                                radius="xl"
                             >
-                                <Text>{data.description}</Text>
-                            </Accordion.Item>
-                            <Accordion.Item
-                                label="Amenities"
-                                icon={
-                                    <ThemeIcon color="yellow" variant="light" radius="xl">
-                                        <Pencil size={20} />
-                                    </ThemeIcon>}
+                                <Pencil size={20} />
+                            </ThemeIcon>
+                        }
+                    >
+                        {subLocAmenities(data)}
+                    </Accordion.Item>
+                    <Accordion.Item
+                        label="Types of Study Spaces"
+                        icon={
+                            <ThemeIcon
+                                color="beige"
+                                variant="light"
+                                radius="xl"
                             >
-                                {subLocAmenities(data)}
-                            </Accordion.Item>
-                            <Accordion.Item
-                                label="Types of Study Spaces"
-                                icon={
-                                    <ThemeIcon color="beige" variant="light" radius="xl">
-                                        <Armchair size={20} />
-                                    </ThemeIcon>}
-                            >
-                                {subLocStudySpaces(data)}
-                            </Accordion.Item>
-                        </Accordion>
-                    </>
-                ) : (
-                    <p>Loading...</p>
-                )}
+                                <Armchair size={20} />
+                            </ThemeIcon>
+                        }
+                    >
+                        {subLocStudySpaces(data)}
+                    </Accordion.Item>
+                </Accordion>
             </Card>
-        </div>
-
+        </Container>
+    ) : (
+        <p>Loading...</p>
     )
 }
-
 
 function cardAccessNeeded(cardAccess) {
     if (cardAccess) {
         return (
-            <Alert mt="md" mb="md" icon={<AlertCircle size={16} />} title="Card Access Required" color="red">
+            <Alert
+                mt="md"
+                mb="md"
+                icon={<AlertCircle size={16} />}
+                title="Card Access Required"
+                color="red"
+            >
                 A staff or departmental card is needed to access this space.
             </Alert>
-        );
-
+        )
     }
 }
 
-
 function subLocAmenities(sublocation) {
-
     // Extract amenities into map
-    const { toilets_nearby, microwave, monitor, plug_sockets, printer, whiteboard, height_adjustable_desks } = sublocation;
+    const {
+        toilets_nearby,
+        microwave,
+        monitor,
+        plug_sockets,
+        printer,
+        whiteboard,
+        height_adjustable_desks,
+    } = sublocation
 
     return (
         <div>
-            <List
-                spacing="xs"
-                size="sm"
-                center
-            >
-                <List.Item icon={listIcon(toilets_nearby)}>Toilets Nearby</List.Item>
-                <List.Item icon={listIcon(microwave)}>Microwave Nearby</List.Item>
+            <List spacing="xs" size="sm" center>
+                <List.Item icon={listIcon(toilets_nearby)}>
+                    Toilets Nearby
+                </List.Item>
+                <List.Item icon={listIcon(microwave)}>
+                    Microwave Nearby
+                </List.Item>
                 <List.Item icon={listIcon(monitor)}>Monitor</List.Item>
-                <List.Item icon={listIcon(plug_sockets)}>Plug Sockets</List.Item>
+                <List.Item icon={listIcon(plug_sockets)}>
+                    Plug Sockets
+                </List.Item>
                 <List.Item icon={listIcon(printer)}>Printer</List.Item>
                 <List.Item icon={listIcon(whiteboard)}>WhiteBoard</List.Item>
-                <List.Item icon={listIcon(height_adjustable_desks)}>Height Adjustable Desks</List.Item>
-
+                <List.Item icon={listIcon(height_adjustable_desks)}>
+                    Height Adjustable Desks
+                </List.Item>
             </List>
         </div>
     )
@@ -142,31 +189,41 @@ function listIcon(available) {
             <ThemeIcon color="teal" size={24} radius="xl">
                 <CircleCheck size={16} />
             </ThemeIcon>
-        );
+        )
     } else {
-        return (<ThemeIcon color="red" size={24} radius="xl">
-            <CircleOff size={16} />
-        </ThemeIcon>);
+        return (
+            <ThemeIcon color="red" size={24} radius="xl">
+                <CircleOff size={16} />
+            </ThemeIcon>
+        )
     }
 }
 
 function subLocStudySpaces(sublocation) {
-    const { group_study_available, silent_study_available, breakout_space_available, quiet_study_available } = sublocation
+    const {
+        group_study_available,
+        silent_study_available,
+        breakout_space_available,
+        quiet_study_available,
+    } = sublocation
 
-    const spaceMap = new Map();
+    const spaceMap = new Map()
 
     return (
         <div>
-            <List
-                spacing="xs"
-                size="sm"
-                center
-            >
-                <List.Item icon={listIcon(breakout_space_available)}>Breakout Space Available</List.Item>
-                <List.Item icon={listIcon(silent_study_available)}>Silent Study Available</List.Item>
-                <List.Item icon={listIcon(quiet_study_available)}>Quiet Study Available</List.Item>
-                <List.Item icon={listIcon(group_study_available)}>Group Study Available</List.Item>
-
+            <List spacing="xs" size="sm" center>
+                <List.Item icon={listIcon(breakout_space_available)}>
+                    Breakout Space Available
+                </List.Item>
+                <List.Item icon={listIcon(silent_study_available)}>
+                    Silent Study Available
+                </List.Item>
+                <List.Item icon={listIcon(quiet_study_available)}>
+                    Quiet Study Available
+                </List.Item>
+                <List.Item icon={listIcon(group_study_available)}>
+                    Group Study Available
+                </List.Item>
             </List>
         </div>
     )

@@ -3,7 +3,7 @@ import SubStudySpaces from './substudyspaces'
 import Link from 'next/link'
 import CapacityBar from './CapacityBar'
 import { locationCapacity } from '../utils/capacity'
-import { Books, BuildingArch, BuildingCommunity, Flower, School, Trees } from 'tabler-icons-react'
+import { Books, BuildingArch, BuildingCommunity, BuildingHospital, DeviceLaptop, Flower, Home, School, Trees } from 'tabler-icons-react'
 
 export default function LocationListCard({ location }) {
 	const { name, sub_locations } = location
@@ -63,6 +63,12 @@ function getIcon(name) {
 		return <School />
 	} else if (name.includes("Lawn")) {
 		return <Flower />
+	} else if (name.includes("Huxley")) {
+		return <DeviceLaptop />
+	} else if (name.includes("Hospital")) {
+		return <BuildingHospital />
+	} else if (name.includes("Hall")) {
+		return <Home />
 	} else {
 		return <BuildingCommunity />
 	}

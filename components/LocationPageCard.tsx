@@ -82,6 +82,7 @@ interface AccordionLabelProps {
 function AccordionLabel({ label, status }: AccordionLabelProps) {
 	let color;
 	switch (status) {
+		case "Open 24 Hours":
 		case "Open":
 			color = "green";
 			break;
@@ -102,21 +103,24 @@ function OpeningStatus({ location }) {
 	const { time_open, time_closed } = location
 
 	// Displays "open", "closes" or "closes soon" (if location closes within an hour)
-	const openingTime = parseInt(moment(time_open).format('HH'));
-	const closingTime = parseInt(moment(time_closed).format('HH'));
+	let openingTime = parseInt(moment(time_open).format('HH'));
+	let closingTime = parseInt(moment(time_closed).format('HH'));
 
 	var current = new Date();
 	var currentHour = current.getHours();
 
 	let status;
 
-	if (openingTime <= currentHour && currentHour < closingTime) {
-		status = "Open";
-	} else if (currentHour == 11 && closingTime == 12 || currentHour == closingTime - 1) {
-		status = "Closing Soon";
-	} else {
+	if (openingTime == closingTime) {
+		status = "Open 24 Hours"
+	} else if (currentHour < openingTime && currentHour + 24 >= closingTime) {
 		status = "Closed";
+	} else if (currentHour > openingTime && closingTime > openingTime && currentHour >= closingTime) {
+		status = "Closed";
+	} else if (currentHour == closingTime - 1 || closingTime == 0 && currentHour == 23) {
+		status = "Closing Soon"
+	} else {
+		status = "Open"
 	}
-
 	return status;
 }

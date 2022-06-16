@@ -8,7 +8,7 @@ import OpeningHoursAccordionItem from './OpeningHours'
 import moment from 'moment'
 
 export default function LocationPageCard({ location }) {
-	const { url, name, sub_locations } = location
+	const { picture, name, sub_locations } = location
 
 	return (
 		<Card
@@ -23,15 +23,8 @@ export default function LocationPageCard({ location }) {
 			<Card.Section>
 				<Image
 					height={160}
-					src={url}
+					src={picture}
 					alt={name}
-					withPlaceholder
-					placeholder={
-						<Image
-							height={160}
-							src="https://www.imperial.ac.uk/media/migration/administration-and-support-services/library-3--tojpeg_1550242474436_x2.jpg"
-						></Image>
-					}
 				/>
 			</Card.Section>
 			<Group

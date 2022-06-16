@@ -137,7 +137,9 @@ export default function SubLocation() {
                             </ThemeIcon>
                         }
                     >
-                        <Text>Here are specific directions to help locate this area...</Text>
+                        <Text>Here are specific directions to help locate this area...
+                            ᕙ(  •̀ ᗜ •́  )ᕗ
+                        </Text>
                     </Accordion.Item>
                 </Accordion>
             </Card>

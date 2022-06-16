@@ -3,7 +3,7 @@ import CapacityGraph from '../../components/CapacityGraph'
 import useSWR from 'swr'
 import { fetcher } from '../../utils/fetcher'
 import { useEffect, useState } from 'react'
-import { Accordion, Card, Container, Text, Group } from '@mantine/core'
+import { Accordion, Card, Image, Text, Group, Container } from '@mantine/core'
 import CapacityBar from '../../components/CapacityBar'
 import CapacityTag from '../../components/CapacityTag'
 import BackButton from '../../components/BackButton'
@@ -35,6 +35,13 @@ export default function SubLocation() {
 				>
 					{data ? (
 						<>
+                            <Card.Section>
+                                <Image
+                                    height={160}
+                                    src={data.locations.picture}
+                                    alt={data.locations.name}
+                                />
+                            </Card.Section>
 							<Group
 								position="apart"
 								direction="column"

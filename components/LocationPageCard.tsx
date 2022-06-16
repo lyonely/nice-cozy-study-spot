@@ -17,7 +17,7 @@ export default function LocationPageCard({ location }) {
 			p="md"
 			withBorder
 			style={{
-				margin: '1.5em 0.5em 1.5em 0.5em',
+				margin: '0.25em 0.5em 1.5em 0.5em',
 			}}
 		>
 			<Card.Section>
@@ -46,7 +46,7 @@ export default function LocationPageCard({ location }) {
 					isSubLocation={false}
 				/>
 			</Group>
-			<Accordion offsetIcon={false}>
+			<Accordion offsetIcon={false} initialItem={1}>
 
 				<Accordion.Item label={<AccordionLabel label={name} status={OpeningStatus({ location })} />}>
 					<OpeningHours location={location} />

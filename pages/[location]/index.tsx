@@ -3,6 +3,7 @@ import useSWR from "swr";
 import { fetcher } from "../../utils/fetcher";
 import LocationPageCard from "../../components/LocationPageCard";
 import { Container } from "@mantine/core";
+import BackButton from '../../components/BackButton';
 
 export default function Location() {
 	const router = useRouter()
@@ -10,9 +11,12 @@ export default function Location() {
 	const { data, error } = useSWR(`/api/${location}`, fetcher)
 
 	return (
-		<Container>
-			{data ? (
-				<LocationPageCard location={data} />) : <p>Loading...</p>}
-		</Container>
+		<div>
+			<BackButton url="/studyspaces" text="Location List" />
+			<Container>
+				{data ? (
+					<LocationPageCard location={data} />) : <p>Loading...</p>}
+			</Container>
+		</div>
 	)
 }

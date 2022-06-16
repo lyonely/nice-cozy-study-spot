@@ -3,6 +3,7 @@ import LocationListCard from './LocationCard'
 import SearchBar from './SearchBar'
 import { useState, useEffect } from 'react'
 import SubLocationSearchCard from './SubLocationSearchCard'
+import BackButton from './BackButton'
 
 export default function StudySpaceList() {
 	const [term, setTerm] = useState('')
@@ -33,27 +34,29 @@ export default function StudySpaceList() {
 		}
 	}, [term])
 	return (
-		<Container>
-			<SearchBar setTerm={setTerm} />
-			{data && data.length !== 0
-				&& <>
-					<Text size="xs" align='center' color='gray'>Locations</Text>
-					{data.map((location) => (
-						<LocationListCard
-							location={location}
-							key={location.name}
-						/>
-					))}
+		<>
+			<Container>
+				<SearchBar setTerm={setTerm} />
+				{data && data.length !== 0
+					&& <>
+						<Text size="xs" align='center' color='gray'>Locations</Text>
+						{data.map((location) => (
+							<LocationListCard
+								location={location}
+								key={location.name}
+							/>
+						))}
+					</>}
+				{subLocData && subLocData.length !== 0 && <>
+					<Text size="xs" align='center' color='gray'>Sub Locations</Text>
+					{subLocData.map((sl) => (
+						<SubLocationSearchCard
+							sub_location={sl}
+							key={sl.name}
+						/>))}
 				</>}
-			{subLocData && subLocData.length !== 0 && <>
-				<Text size="xs" align='center' color='gray'>Sub Locations</Text>
-				{subLocData.map((sl) => (
-					<SubLocationSearchCard
-						sub_location={sl}
-						key={sl.name}
-					/>))}
-			</>}
 
-		</Container>
+			</Container>
+		</>
 	)
 }

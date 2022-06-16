@@ -36,7 +36,7 @@ export default function StudySpaceList() {
 	return (
 		<>
 			<Container>
-				<SearchBar setTerm={setTerm} />
+				<SearchBar term={term} setTerm={setTerm} />
 				{data && data.length !== 0
 					&& <>
 						<Text size="xs" align='center' color='gray'>Locations</Text>

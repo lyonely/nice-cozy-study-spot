@@ -20,9 +20,10 @@ export default function SubLocation() {
 	}, [data])
 
 	return (
-		<div>
-			<BackButton url={`/${location}`} text={location} />
+		<Container>
 			<div>
+
+				<BackButton url={`/${location}`} text={location} />
 				<Card
 					shadow="sm"
 					radius="lg"
@@ -66,6 +67,6 @@ export default function SubLocation() {
 					)}
 				</Card>
 			</div>
-		</div>
+		</Container>
 	)
 }

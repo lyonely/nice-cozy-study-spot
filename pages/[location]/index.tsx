@@ -11,12 +11,11 @@ export default function Location() {
 	const { data, error } = useSWR(`/api/${location}`, fetcher)
 
 	return (
-		<div>
+		<Container>
+
 			<BackButton url="/studyspaces" text="Location List" />
-			<Container>
-				{data ? (
-					<LocationPageCard location={data} />) : <p>Loading...</p>}
-			</Container>
-		</div>
+			{data ? (
+				<LocationPageCard location={data} />) : <p>Loading...</p>}
+		</Container>
 	)
 }

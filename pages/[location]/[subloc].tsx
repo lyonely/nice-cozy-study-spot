@@ -22,6 +22,7 @@ import {
     CircleCheck,
     CircleOff,
     FileDescription,
+    Map2,
     Pencil,
 } from 'tabler-icons-react'
 import BackButton from '../../components/BackButton'
@@ -123,6 +124,22 @@ export default function SubLocation() {
                         }
                     >
                         {subLocStudySpaces(data)}
+                    </Accordion.Item>
+                    <Accordion.Item
+                        label="Directions"
+                        icon={
+                            <ThemeIcon
+                                color="green"
+                                variant="light"
+                                radius="xl"
+                            >
+                                <Map2 size={20} />
+                            </ThemeIcon>
+                        }
+                    >
+                        <Text>Here are specific directions to help locate this area...
+                            ᕙ(  •̀ ᗜ •́  )ᕗ
+                        </Text>
                     </Accordion.Item>
                 </Accordion>
             </Card>

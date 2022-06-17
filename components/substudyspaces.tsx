@@ -23,6 +23,7 @@ export default function SubStudySpaces({ location, sub_locations }) {
                         marginBottom: '0.25em',
                         padding: '0.25em 0.75em 0.25em 0.75em',
                         color: 'black',
+                        boxShadow: '1px 1px 2px'
                     }}
                 >
                     <Text style={{ maxWidth: 'max-content' }} weight={500}>

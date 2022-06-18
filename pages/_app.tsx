@@ -1,14 +1,14 @@
 import '../style/base.scss'
 import Head from 'next/head'
 import type { AppProps } from 'next/app'
-
+import { UserProvider } from '@auth0/nextjs-auth0'
 import { MantineProvider } from '@mantine/core'
 import { AppTheme } from '../style/AppTheme'
 import TopBar from '../components/TopBar'
 
 export default function MyApp({ Component, pageProps }: AppProps) {
 	return (
-		<div>
+		<UserProvider>
 
 			<Head>
 				<title>Imperial Study Spaces!!!</title>
@@ -19,5 +19,6 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 				<TopBar />
 				<Component {...pageProps} />
 
-			</MantineProvider></div>)
+			</MantineProvider>
+		</UserProvider>)
 }

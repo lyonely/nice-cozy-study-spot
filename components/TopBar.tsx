@@ -1,12 +1,15 @@
-import { Space, Group, Container } from '@mantine/core'
+import { Space, Group, Button, Text } from '@mantine/core'
 import { MapPin } from 'react-feather';
 import Link from 'next/link'
 import { useViewportSize } from '@mantine/hooks';
 import { AppTheme } from '../style/AppTheme';
+import { useUser } from '@auth0/nextjs-auth0';
 
 
 export default function TopBar() {
 	const { height, width } = useViewportSize();
+	const { user: user } = useUser()
+	console.log(user)
 	return (
 		<div style={{ display: 'flex', justifyContent: 'center' }}>
 			<div style={{
@@ -16,7 +19,8 @@ export default function TopBar() {
 					width: width
 				},
 			}}>
-				<Container px="xs" sx={(theme) => ({
+				<Group px="xs" position="apart" sx={(theme) => ({
+					padding: "0.75em 0 0.75em 0",
 					backgroundColor: theme.colors.brown[0],
 				})}>
 					<Space h="xs" />
@@ -28,7 +32,14 @@ export default function TopBar() {
 						</Group>
 					</Link>
 					<Space h="xs" />
-				</Container>
+					{user ? <Link href="/api/auth/logout" passHref>
+						<Button variant='subtle'>
+							<Text weight={300}>Log Out</Text>
+						</Button>
+					</Link> : <Link href="/api/auth/login" passHref>
+						<Button variant='subtle'><Text weight={300}>Log In</Text></Button>
+					</Link>}
+				</Group>
 			</div>
 		</div>
 	);

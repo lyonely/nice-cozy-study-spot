@@ -39,17 +39,17 @@ export default function TopBar() {
 						</Group>
 					</Link>
 					{!isLoading && user ? (
-						<Link href="/api/auth/logout" passHref>
+						<a href="/api/auth/logout">
 							<Button variant="subtle" compact={true}>
 								<Text weight={300}>Log Out</Text>
 							</Button>
-						</Link>
+						</a>
 					) : (
-						<Link href="/api/auth/login" passHref>
+						<a href="/api/auth/login">
 							<Button variant="subtle" compact={true}>
 								<Text weight={300}>Log In</Text>
 							</Button>
-						</Link>
+						</a>
 					)}
 				</Group>
 			</div>

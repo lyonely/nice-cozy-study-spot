@@ -100,3 +100,9 @@ body {
         align-items: center;
     }
 }
+
+.star {
+    &__filled {
+        fill: black;
+    }
+}

@@ -13,7 +13,6 @@ import {
     Alert,
     Container,
     Image,
-    Title,
 } from '@mantine/core'
 import CapacityTag from '../../components/CapacityTag'
 import {
@@ -27,6 +26,8 @@ import {
 } from 'tabler-icons-react'
 import BackButton from '../../components/BackButton'
 import LoadingCircle from '../../components/LoadingCircle'
+import { useUser } from '@auth0/nextjs-auth0'
+import StarButton from '../../components/StarButton'
 
 export default function SubLocation() {
     const router = useRouter()
@@ -34,6 +35,7 @@ export default function SubLocation() {
         query: { location, subloc },
     } = router
     const { data, error } = useSWR(`/api/${location}/${subloc}`, fetcher)
+    const { user } = useUser()
 
     useEffect(() => {
         console.log(data)
@@ -64,9 +66,12 @@ export default function SubLocation() {
                     spacing="xs"
                     style={{ marginTop: '1em' }}
                 >
-                    <Text weight={600} size="xl">
-                        {subloc}
-                    </Text>
+                    <Group position="apart" style={{ width: '100%' }}>
+                        <Text weight={600} size="xl">
+                            {subloc}
+                        </Text>
+                        <StarButton disabled={user == null} saved={false} />
+                    </Group>
 
                     <Group>
                         <Text size="sm" color="gray">

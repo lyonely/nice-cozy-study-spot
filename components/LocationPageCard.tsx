@@ -1,13 +1,12 @@
 import { Card, Image, Text, Group, Accordion } from '@mantine/core'
 import SubStudySpaces from './substudyspaces'
-import Link from 'next/link'
 import CapacityBar from './CapacityBar'
 import { locationCapacity } from '../utils/capacity'
 import OpeningHours from './OpeningHours'
-import OpeningHoursAccordionItem from './OpeningHours'
 import moment from 'moment'
+import StarButton from './StarButton'
 
-export default function LocationPageCard({ location }) {
+export default function LocationPageCard({ location, user }) {
     const { picture, name, sub_locations } = location
 
     return (
@@ -29,9 +28,12 @@ export default function LocationPageCard({ location }) {
                 spacing="xs"
                 style={{ marginTop: '1em' }}
             >
-                <Text weight={600} size="xl">
-                    {name}
-                </Text>
+                <Group position="apart" style={{ width: '100%' }}>
+                    <Text weight={600} size="xl">
+                        {name}
+                    </Text>
+                    <StarButton disabled={user == null} saved={false} />
+                </Group>
                 <Text size="sm" color="gray" style={{ paddingLeft: '0.5em' }}>
                     capacity
                 </Text>

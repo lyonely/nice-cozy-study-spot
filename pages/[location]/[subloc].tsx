@@ -26,6 +26,7 @@ import {
     Pencil,
 } from 'tabler-icons-react'
 import BackButton from '../../components/BackButton'
+import LoadingCircle from '../../components/LoadingCircle'
 
 export default function SubLocation() {
     const router = useRouter()
@@ -137,15 +138,16 @@ export default function SubLocation() {
                             </ThemeIcon>
                         }
                     >
-                        <Text>Here are specific directions to help locate this area...
-                            ᕙ(  •̀ ᗜ •́  )ᕗ
+                        <Text>
+                            Here are specific directions to help locate this
+                            area... ᕙ( •̀ ᗜ •́ )ᕗ
                         </Text>
                     </Accordion.Item>
                 </Accordion>
             </Card>
         </Container>
     ) : (
-        <p>Loading...</p>
+        <LoadingCircle />
     )
 }
 

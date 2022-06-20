@@ -4,11 +4,13 @@ import SearchBar from './SearchBar'
 import { useState, useEffect } from 'react'
 import SubLocationSearchCard from './SubLocationSearchCard'
 import LoadingCircle from './LoadingCircle'
+import { useUser } from '@auth0/nextjs-auth0'
 
 export default function StudySpaceList() {
     const [term, setTerm] = useState('')
     const [data, setData] = useState<any[]>()
     const [subLocData, setSubLocData] = useState<any[]>()
+    const { user } = useUser()
 
     const fetchLocations = async () => {
         const resp = await fetch(`/api/locations?term=${term}`)
@@ -46,6 +48,7 @@ export default function StudySpaceList() {
                     {data.map((location) => (
                         <LocationListCard
                             location={location}
+                            user={user}
                             key={location.name}
                         />
                     ))}

@@ -13,6 +13,8 @@ import {
 	Alert,
 	Container,
 	Image,
+	Space,
+	Anchor,
 } from '@mantine/core'
 import CapacityTag from '../../../components/CapacityTag'
 import {
@@ -23,6 +25,8 @@ import {
 	FileDescription,
 	Map2,
 	Pencil,
+	MessageReport,
+	LockAccess
 } from 'tabler-icons-react'
 import BackButton from '../../../components/BackButton'
 import LoadingCircle from '../../../components/LoadingCircle'
@@ -89,6 +93,7 @@ export default function SubLocation() {
 						Daily Capacity Trends
 					</Text>
 					<CapacityGraph datapoints={data.trend_capacity} />
+					<Space />
 
 					{cardAccessNeeded(data.card_access_needed)}
 				</Group>
@@ -149,6 +154,14 @@ export default function SubLocation() {
 						</Text>
 					</Accordion.Item>
 				</Accordion>
+
+				<Group noWrap mt={20} mb={15}>
+					<Text size="sm">
+						See any isssues (E.g. faulty sockets, missing whiteboards)
+						in this space? {reportIssuesAnchor()}
+					</Text>
+				</Group>
+
 			</Card>
 		</Container>
 	) : (
@@ -156,18 +169,36 @@ export default function SubLocation() {
 	)
 }
 
+// TODO: link this to the page for reporting issues
+function reportIssuesAnchor() {
+	return (<Anchor
+		mb={10}
+		underline
+		size="sm"
+		href="https://mantine.dev/"
+		target="_blank"
+		color="red">
+		Report any issues here.
+	</Anchor>)
+}
+
 function cardAccessNeeded(cardAccess) {
 	if (cardAccess) {
 		return (
-			<Alert
-				mt="md"
-				mb="md"
-				icon={<AlertCircle size={16} />}
-				title="Card Access Required"
-				color="red"
-			>
-				A staff or departmental card is needed to access this space.
-			</Alert>
+			<Group grow>
+				<Alert
+					mb="md"
+					icon={<LockAccess size={16} />}
+					title="Card Access Required "
+					color="beige"
+					radius="md"
+				>
+					A staff or departmental card is needed to access this space.
+				</Alert>
+
+			</Group>
+
+
 		)
 	}
 }

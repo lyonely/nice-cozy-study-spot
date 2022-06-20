@@ -29,7 +29,7 @@ export default function TopBar() {
                     })}
                 >
                     <Link href="/">
-                        <Group style={{ marginLeft: '0.75em' }}>
+                        <Group style={{ marginLeft: '0em' }}>
                             <MapPin />
 
                             <div className="hotbar__title">
@@ -39,13 +39,13 @@ export default function TopBar() {
                     </Link>
                     {user ? (
                         <Link href="/api/auth/logout" passHref>
-                            <Button variant="subtle">
+                            <Button variant="subtle" compact={true}>
                                 <Text weight={300}>Log Out</Text>
                             </Button>
                         </Link>
                     ) : (
                         <Link href="/api/auth/login" passHref>
-                            <Button variant="subtle">
+                            <Button variant="subtle" compact={true}>
                                 <Text weight={300}>Log In</Text>
                             </Button>
                         </Link>

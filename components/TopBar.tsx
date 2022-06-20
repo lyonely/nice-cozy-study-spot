@@ -8,7 +8,7 @@ import { useUser } from '@auth0/nextjs-auth0'
 export default function TopBar() {
 	console.log(process.env.AUTH0_BASE_URL)
 	const { height, width } = useViewportSize()
-	const { user: user } = useUser()
+	const { user, error, isLoading } = useUser()
 	console.log(user)
 	return (
 		<div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -38,7 +38,7 @@ export default function TopBar() {
 							</div>
 						</Group>
 					</Link>
-					{user ? (
+					{!isLoading && user ? (
 						<Link href="/api/auth/logout" passHref>
 							<Button variant="subtle" compact={true}>
 								<Text weight={300}>Log Out</Text>

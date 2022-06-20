@@ -15,6 +15,9 @@ import {
 	Image,
 	Space,
 	Anchor,
+	Stack,
+	Modal,
+	Button,
 } from '@mantine/core'
 import CapacityTag from '../../../components/CapacityTag'
 import {
@@ -44,6 +47,19 @@ export default function SubLocation() {
 	useEffect(() => {
 		console.log(data)
 	}, [data])
+
+	// TEMPORARY for problem reporting
+	// const [issues, setIssues] = useState([])
+	const issues = [
+		{
+			title: "Faulty Socket",
+			description: "Socket seems to be broken"
+		},
+		{
+			title: "Missing Chair",
+			description: "Missing Swivel Chair :("
+		}
+	]
 
 	return data ? (
 		<Container>
@@ -94,9 +110,13 @@ export default function SubLocation() {
 					</Text>
 					<CapacityGraph datapoints={data.trend_capacity} />
 					<Space />
-
-					{cardAccessNeeded(data.card_access_needed)}
 				</Group>
+
+				<Stack spacing={0}>
+					{displayAnyIssues(issues)}
+					{cardAccessNeeded(data.card_access_needed)}
+				</Stack>
+
 				<Accordion offsetIcon={false}>
 					<Accordion.Item
 						label="Description"
@@ -155,13 +175,15 @@ export default function SubLocation() {
 					</Accordion.Item>
 				</Accordion>
 
-				<Group noWrap mt={20} mb={15}>
-					<Text size="sm">
-						See any isssues (E.g. faulty sockets, missing whiteboards)
+				<Group mt={20} mb={15} spacing={0}>
+					<Text size="sm" mb={0}>
+						See any problems (E.g. faulty sockets, missing whiteboards)
 						in this space? {reportIssuesAnchor()}
 					</Text>
+					<Text size="xs" mt={0} >
+						*** If the issue seems to be resolved, please remove it to notify other users.
+					</Text>
 				</Group>
-
 			</Card>
 		</Container>
 	) : (
@@ -181,6 +203,50 @@ function reportIssuesAnchor() {
 		Report any issues here.
 	</Anchor>)
 }
+
+function displayAnyIssues(issues) {
+	if (issues.size != 0) {
+		return (
+			<Stack mb={20} spacing={7} align="right">
+				{issues.map(i =>
+					<>{displayIssue(i)} </>)
+				}
+			</Stack>)
+	}
+}
+
+function displayIssue(issue) {
+	const [opened, setOpened] = useState(false);
+	return (
+		<>
+			<Modal
+				opened={opened}
+				onClose={() => setOpened(false)}
+				withCloseButton={false}
+			>
+				{issue.description}
+			</Modal>
+
+			<Group>
+				<Button
+					fullWidth
+					compact
+					onClick={() => setOpened(true)}
+					color="red"
+					radius="md"
+					variant="light"
+				>
+					<Space w={7} />
+					<MessageReport size={16} />
+					<Space w={13} />
+					{issue.title}
+				</Button>
+			</Group>
+		</>
+	)
+
+}
+
 
 function cardAccessNeeded(cardAccess) {
 	if (cardAccess) {

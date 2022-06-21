@@ -14,26 +14,21 @@ import {
 	Container,
 	Image,
 	Space,
-	Anchor,
 	Stack,
 	Modal,
 	Button,
 	Divider,
-	Paper,
 	Box,
 } from '@mantine/core'
 import CapacityTag from '../../../components/CapacityTag'
 import {
-	AlertCircle,
 	Armchair,
 	CircleCheck,
 	CircleOff,
 	FileDescription,
 	Map2,
 	Pencil,
-	MessageReport,
 	LockAccess,
-	ThumbUp,
 	Flag
 } from 'tabler-icons-react'
 import BackButton from '../../../components/BackButton'

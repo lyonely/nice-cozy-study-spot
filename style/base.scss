@@ -7,102 +7,111 @@ $DM-sans: 'DM Sans', sans-serif;
 $primary-color: #faf0d4;
 
 body {
-    font: 100% $DM-sans;
-    background-color: $primary-color;
+	font: 100% $DM-sans;
+	background-color: $primary-color;
 }
 
 .container {
-    display: flex;
+	display: flex;
 
-    &__vert {
-        @extend .container;
-        flex-direction: column;
-    }
+	&__vert {
+		@extend .container;
+		flex-direction: column;
+	}
 
-    &__hor {
-        @extend .container;
-        flex-direction: row;
-    }
+	&__hor {
+		@extend .container;
+		flex-direction: row;
+	}
 }
 
 .landing {
-    @extend .card;
-    flex-direction: column;
-    padding: 1.25em 1.25em 1.25em 1.25em;
-    background-color: white;
+	@extend .card;
+	flex-direction: column;
+	padding: 1.25em 1.25em 1.25em 1.25em;
+	background-color: white;
 
-    &__title {
-        font-family: $DM-serif;
-        font-size: 3em;
-    }
+	&__title {
+		font-family: $DM-serif;
+		font-size: 3em;
+	}
 
-    &__desc {
-        font-family: $DM-sans;
-        font-size: 20px;
-    }
+	&__desc {
+		font-family: $DM-sans;
+		font-size: 20px;
+	}
 
-    &__button {
-        margin-left: auto;
-        margin-right: 0;
-    }
+	&__button {
+		margin-left: auto;
+		margin-right: 0;
+	}
 }
 
 .hotbar {
-    &__title {
-        font-family: $DM-sans;
-        font-size: 1.25em;
-    }
+	&__title {
+		font-family: $DM-sans;
+		font-size: 1.25em;
+	}
 }
 
 .card {
-    @extend .container;
-    border-radius: 2em;
-    box-shadow: 0.5em;
+	@extend .container;
+	border-radius: 2em;
+	box-shadow: 0.5em;
 }
 
 .bg {
-    background-color: $primary-color;
+	background-color: $primary-color;
 }
 
 .capacity-bar {
-    margin-left: auto;
-    margin-right: 0;
-    background-color: white;
-    border: 1px solid #000000;
-    border-radius: 15px;
-    width: 100%;
-    height: 15px;
+	margin-left: auto;
+	margin-right: 0;
+	background-color: white;
+	border: 1px solid #000000;
+	border-radius: 15px;
+	width: 100%;
+	height: 15px;
 
-    &__sublocation {
-        @extend .capacity-bar;
-        width: 75%;
-        margin: 0;
-    }
+	&__sublocation {
+		@extend .capacity-bar;
+		width: 75%;
+		margin: 0;
+	}
 
-    &__inner {
-        height: 100%;
-        border-radius: 15px;
-    }
+	&__inner {
+		height: 100%;
+		border-radius: 15px;
+	}
 }
 
 .sublocation {
-    &__button {
-        width: 100%;
-        border-radius: 5px;
-    }
+	&__button {
+		width: 100%;
+		border-radius: 5px;
+	}
 
-    &__label {
-        width: 100%;
+	&__label {
+		width: 100%;
 
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-    }
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+	}
+}
+
+.issues {
+	&__button {
+		width: 100%;
+		border-radius: 5px;
+		display: flex;
+		justify-content: space-between;
+	}
 }
 
 .star {
-    &__filled {
-        fill: black;
-    }
+	&__filled {
+		fill: black;
+	}
 }

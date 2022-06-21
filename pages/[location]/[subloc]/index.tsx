@@ -178,30 +178,19 @@ export default function SubLocation() {
 	)
 }
 
-// // TODO: link this to the page for reporting issues
-// function reportIssuesAnchor(location, sublocation) {
-// 	return (<Anchor
-// 		mb={10}
-// 		underline
-// 		size="sm"
-// 		href={`/${location}/${sublocation}/report`}
-// 		target="_blank"
-// 		color="red">
-// 		Report any issues here.
-// 	</Anchor>)
-// }
-
 function SubLocationIssues({ issues, mutate }) {
-	return (<div style={{ marginTop: "0.75em" }}>
-		<Text size="sm" color="gray">Issues</Text>
+	return (<>
+		<Text style={{ margin: "0.75em 0 0.75em 0" }} size="sm" color="gray">Issues</Text>
 		{
 			issues.length === 0 ?
 				<Text weight={300}>This area has no reported issues!</Text> :
 				(<Stack mb={20} spacing={7} align="right">
-					{issues.map((issue) => <IssueAlert mutate={mutate} issue={issue} />)
-					}
+					{issues.map(
+						(issue) => (
+							<IssueAlert mutate={mutate} issue={issue} />
+						))}
 				</Stack>)
-		}</div>)
+		}</>)
 }
 
 function cardAccessNeeded(cardAccess) {

@@ -18,7 +18,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 		},
 		include: {
 			locations: true,
-			issues: true
+			issues: {
+				where:
+					{ resolved: false }
+			}
 		}
 	}))
 }

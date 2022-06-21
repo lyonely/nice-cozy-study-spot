@@ -38,6 +38,7 @@ import LoadingCircle from '../../../components/LoadingCircle'
 import { useUser } from '@auth0/nextjs-auth0'
 import StarButton from '../../../components/StarButton'
 import IssueAlert from '../../../components/IssueAlert'
+import Link from 'next/link'
 
 export default function SubLocation() {
 	const router = useRouter()
@@ -53,7 +54,14 @@ export default function SubLocation() {
 
 	return data ? (
 		<Container>
-			<BackButton url={`/${location}`} text={location} />
+			<Group position='apart'>
+				<BackButton url={`/${location}`} text={location} />
+				<Link href={`/${location}/${subloc}/report`}>
+					<Button style={{ marginRight: "1em" }} variant='outline' compact radius='sm' color='red'>
+						<Text weight={350}>Report an issue</Text>
+					</Button>
+				</Link>
+			</Group>
 			<Card
 				shadow="sm"
 				radius="lg"
@@ -102,10 +110,7 @@ export default function SubLocation() {
 					<Space />
 				</Group>
 
-				<Stack spacing={0}>
-					{displayAnyIssues(data.issues, mutate)}
-					{cardAccessNeeded(data.card_access_needed)}
-				</Stack>
+				<SubLocationIssues issues={data.issues} mutate={mutate} />
 
 				<Accordion offsetIcon={false}>
 					<Accordion.Item
@@ -116,6 +121,8 @@ export default function SubLocation() {
 							</ThemeIcon>
 						}
 					>
+
+						{cardAccessNeeded(data.card_access_needed)}
 						<Text>{data.description}</Text>
 					</Accordion.Item>
 					<Accordion.Item
@@ -164,13 +171,6 @@ export default function SubLocation() {
 						</Text>
 					</Accordion.Item>
 				</Accordion>
-
-				<Group mt={20} mb={15} spacing={0}>
-					<Text size="sm" mb={0}>
-						See any problems (E.g. faulty sockets, missing whiteboards)
-						in this space? {reportIssuesAnchor(location, subloc)}
-					</Text>
-				</Group>
 			</Card>
 		</Container>
 	) : (
@@ -178,27 +178,30 @@ export default function SubLocation() {
 	)
 }
 
-// TODO: link this to the page for reporting issues
-function reportIssuesAnchor(location, sublocation) {
-	return (<Anchor
-		mb={10}
-		underline
-		size="sm"
-		href={`/${location}/${sublocation}/report`}
-		target="_blank"
-		color="red">
-		Report any issues here.
-	</Anchor>)
-}
+// // TODO: link this to the page for reporting issues
+// function reportIssuesAnchor(location, sublocation) {
+// 	return (<Anchor
+// 		mb={10}
+// 		underline
+// 		size="sm"
+// 		href={`/${location}/${sublocation}/report`}
+// 		target="_blank"
+// 		color="red">
+// 		Report any issues here.
+// 	</Anchor>)
+// }
 
-function displayAnyIssues(issues, mutate) {
-	if (issues.size != 0) {
-		return (
-			<Stack mb={20} spacing={7} align="right">
-				{issues.map((issue) => (!issue.resolved && <IssueAlert mutate={mutate} issue={issue} />))
-				}
-			</Stack>)
-	}
+function SubLocationIssues({ issues, mutate }) {
+	return (<>
+		<Text weight={500}>Issues</Text>
+		{
+			issues.length === 0 ?
+				<Text weight={300}>This area has no reported issues!</Text> :
+				(<Stack mb={20} spacing={7} align="right">
+					{issues.map((issue) => <IssueAlert mutate={mutate} issue={issue} />)
+					}
+				</Stack>)
+		}</>)
 }
 
 function cardAccessNeeded(cardAccess) {

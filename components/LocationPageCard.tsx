@@ -7,7 +7,7 @@ import moment from 'moment'
 import StarButton from './StarButton'
 
 export default function LocationPageCard({ location, user }) {
-    const { picture, name, sub_locations } = location
+    const { picture, name, sub_locations, index } = location
 
     return (
         <Card
@@ -32,7 +32,7 @@ export default function LocationPageCard({ location, user }) {
                     <Text weight={600} size="xl">
                         {name}
                     </Text>
-                    <StarButton disabled={user == null} saved={false} />
+                    <StarButton index={index} is_parent_location={true} />
                 </Group>
                 <Text size="sm" color="gray" style={{ paddingLeft: '0.5em' }}>
                     capacity

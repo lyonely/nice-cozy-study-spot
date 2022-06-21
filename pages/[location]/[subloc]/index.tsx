@@ -18,6 +18,7 @@ import {
 	Stack,
 	Modal,
 	Button,
+	Divider,
 } from '@mantine/core'
 import CapacityTag from '../../../components/CapacityTag'
 import {
@@ -29,7 +30,8 @@ import {
 	Map2,
 	Pencil,
 	MessageReport,
-	LockAccess
+	LockAccess,
+	ThumbUp
 } from 'tabler-icons-react'
 import BackButton from '../../../components/BackButton'
 import LoadingCircle from '../../../components/LoadingCircle'
@@ -180,9 +182,6 @@ export default function SubLocation() {
 						See any problems (E.g. faulty sockets, missing whiteboards)
 						in this space? {reportIssuesAnchor()}
 					</Text>
-					<Text size="xs" mt={0} >
-						*** If the issue seems to be resolved, please remove it to notify other users.
-					</Text>
 				</Group>
 			</Card>
 		</Container>
@@ -225,6 +224,18 @@ function displayIssue(issue) {
 				withCloseButton={false}
 			>
 				{issue.description}
+				<Divider mt="sm" />
+				<Text size="xs" mt={3} mb={3} >
+					If the issue seems to be resolved, please remove it to notify other users.
+				</Text>
+				<Button
+					color="blue"
+					variant="light"
+				>
+					<ThumbUp />
+					<Space w={3} />
+					Mark as Resolved
+				</Button>
 			</Modal>
 
 			<Group>

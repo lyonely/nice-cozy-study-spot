@@ -77,7 +77,7 @@ export default function Report(
 							{...form.getInputProps('subject')}
 						></TextInput>
 						<Textarea
-							label="Description"
+							label="Description (Optional)"
 							placeholder="Details of the issue"
 							minRows={10}
 							maxRows={20}

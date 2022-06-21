@@ -247,7 +247,7 @@ function SubLocationIssues({ issues, mutate }) {
 }
 
 function getDirections(directions) {
-	const dirList = directions.split(".");
+	const dirList = ((directions) ? directions : "").split(".");
 	return (
 		<>{dirList.map(
 			direction => (<Text size="sm">{direction}</Text>))

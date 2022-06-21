@@ -34,24 +34,47 @@ const allFilters = () => {
 
 export default function StudySpaceList() {
     const [term, setTerm] = useState('')
-    const [data, setData] = useState<any[]>()
+    const [data, setData] = useState<any[]>([])
     const [subLocData, setSubLocData] = useState<any[]>()
     const { user } = useUser()
     const [sortOrder, setSortOrder] = useState('')
-    const [filters, setFilters] = useState<any[]>()
+    const [filters, setFilters] = useState<any[]>([])
+
+    // const compareLocations = () => {
+    //     switch (sortOrder) {
+    //         case 'a-z': break;
+    //         case 'z-a': break;
+    //     }
+    // }
 
     const fetchLocations = async () => {
-        const resp = await fetch(`/api/locations?term=${term}`)
-        setData(await resp.json())
+        if (filters.length === 0) {
+            const resp = await fetch(`/api/locations?term=${term}`)
+            setData(await resp.json())
+        } else {
+            setData([])
+        }
     }
 
     const fetchSubLocations = async () => {
-        if (term) {
+        if (term || filters.length > 0) {
             setSubLocData(
-                await (await fetch(`/api/sublocations?term=${term}`)).json()
+                await (
+                    await fetch(`/api/sublocations?term=${term}`, {
+                        body: JSON.stringify({ filters }),
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                    })
+                ).json()
             )
         }
     }
+
+    useEffect(() => {
+        console.log(filters)
+    }, [filters])
 
     useEffect(() => {
         console.log(data)
@@ -60,11 +83,11 @@ export default function StudySpaceList() {
 
     useEffect(() => {
         fetchLocations()
-        if (term) {
+        if (term || filters.length > 0) {
             fetchSubLocations()
             console.log(term)
         }
-    }, [term])
+    }, [term, filters])
     return data ? (
         <Container>
             <SearchBar term={term} setTerm={setTerm} />
@@ -86,8 +109,10 @@ export default function StudySpaceList() {
                     data={allFilters().sort((x, y) => {
                         return x.label.localeCompare(y.label)
                     })}
+                    onChange={setFilters}
+                    value={filters}
                     clearable
-                    style={{ maxWidth: '60%' }}
+                    style={{ maxWidth: '55%' }}
                 />
             </Group>
             {data && data.length !== 0 && (

@@ -1,12 +1,13 @@
 import { Container, Group, MultiSelect, Select, Text } from '@mantine/core'
 import LocationListCard from './LocationCard'
 import SearchBar from './SearchBar'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import SubLocationSearchCard from './SubLocationSearchCard'
 import LoadingCircle from './LoadingCircle'
 import { useUser } from '@auth0/nextjs-auth0'
 import { locationCapacity } from '../utils/capacity'
 import { compareLocations, compareSubLocations } from '../utils/compare'
+import { useAppContext } from '../utils/state'
 
 const allSortOrders = () => {
 	return [
@@ -40,7 +41,7 @@ export default function StudySpaceList() {
 	const [subLocData, setSubLocData] = useState<any[]>()
 	const { user } = useUser()
 	const [sortOrder, setSortOrder] = useState('')
-	const [filters, setFilters] = useState<any[]>([])
+	const { filters, setFilters } = useAppContext()
 
 	const fetchLocations = async () => {
 		if (filters.length === 0) {

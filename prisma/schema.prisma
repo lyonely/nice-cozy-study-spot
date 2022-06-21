@@ -12,6 +12,7 @@ model locations {
   time_closed   DateTime        @db.Time(6)
   name          String          @db.VarChar
   picture       String?         @db.VarChar
+  directions    String          @default("Use google maps")
   description   String?
   index         Int             @id(map: "locations_pk") @default(autoincrement())
   sub_locations sub_locations[]
@@ -35,7 +36,6 @@ model sub_locations {
   silent_study_available   Boolean   @default(false)
   breakout_space_available Boolean   @default(false)
   height_adjustable_desks  Boolean   @default(false)
-  directions               String    @default("Use google maps")
   trend_capacity           Json?     @db.Json
   index                    Int       @id(map: "sub_locations_pk") @default(autoincrement())
   locations                locations @relation(fields: [parent_index], references: [index], onDelete: NoAction, onUpdate: NoAction, map: "sub_locations_fk")

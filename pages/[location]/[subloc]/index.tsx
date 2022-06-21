@@ -28,6 +28,7 @@ import {
 	FileDescription,
 	Map2,
 	Pencil,
+
 	LockAccess,
 	Flag
 } from 'tabler-icons-react'
@@ -165,9 +166,12 @@ export default function SubLocation() {
 							</ThemeIcon>
 						}
 					>
-						<Text>
-							Here are specific directions to help locate this
-							area... ᕙ( •̀ ᗜ •́ )ᕗ
+						<Text mb={7} size="sm" weight={500}>
+							Here are specific directions to help locate this area ...
+						</Text>
+						{getDirections(data.directions)}
+						<Text mt={7} size="sm" weight={500}>
+							... and you've reached your destination!
 						</Text>
 					</Accordion.Item>
 				</Accordion>
@@ -240,6 +244,17 @@ function SubLocationIssues({ issues, mutate }) {
 
 				</Stack>)
 		}</>)
+}
+
+function getDirections(directions) {
+	const dirList = directions.split(".");
+	return (
+		<>{dirList.map(
+			direction => (<Text size="sm">{direction}</Text>))
+		}
+		</>
+
+	)
 }
 
 function cardAccessNeeded(cardAccess) {

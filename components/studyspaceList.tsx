@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react'
 import SubLocationSearchCard from './SubLocationSearchCard'
 import LoadingCircle from './LoadingCircle'
 import { useUser } from '@auth0/nextjs-auth0'
+import { locationCapacity } from '../utils/capacity'
 
 const allSortOrders = () => {
     return [
@@ -40,12 +41,26 @@ export default function StudySpaceList() {
     const [sortOrder, setSortOrder] = useState('')
     const [filters, setFilters] = useState<any[]>([])
 
-    // const compareLocations = () => {
-    //     switch (sortOrder) {
-    //         case 'a-z': break;
-    //         case 'z-a': break;
-    //     }
-    // }
+    const compareLocations = (x, y) => {
+        switch (sortOrder) {
+            case 'a-z':
+                return x.name.localeCompare(y.name)
+            case 'z-a':
+                return y.name.localeCompare(x.name)
+            case 'capacity-incr':
+                return (
+                    locationCapacity(x.sub_locations) -
+                    locationCapacity(y.sub_locations)
+                )
+            case 'capacity-decr':
+                return (
+                    locationCapacity(y.sub_locations) -
+                    locationCapacity(x.sub_locations)
+                )
+            default:
+                break
+        }
+    }
 
     const fetchLocations = async () => {
         if (filters.length === 0) {
@@ -120,13 +135,15 @@ export default function StudySpaceList() {
                     <Text size="xs" align="center" color="gray">
                         Locations
                     </Text>
-                    {data.map((location) => (
-                        <LocationListCard
-                            location={location}
-                            user={user}
-                            key={location.name}
-                        />
-                    ))}
+                    {data
+                        .sort((x, y) => compareLocations(x, y))
+                        .map((location) => (
+                            <LocationListCard
+                                location={location}
+                                user={user}
+                                key={location.name}
+                            />
+                        ))}
                 </>
             )}
             {subLocData && subLocData.length !== 0 && (

@@ -19,6 +19,8 @@ import {
 	Modal,
 	Button,
 	Divider,
+	Paper,
+	Box,
 } from '@mantine/core'
 import CapacityTag from '../../../components/CapacityTag'
 import {
@@ -31,7 +33,8 @@ import {
 	Pencil,
 	MessageReport,
 	LockAccess,
-	ThumbUp
+	ThumbUp,
+	Flag
 } from 'tabler-icons-react'
 import BackButton from '../../../components/BackButton'
 import LoadingCircle from '../../../components/LoadingCircle'
@@ -57,8 +60,10 @@ export default function SubLocation() {
 			<Group position='apart'>
 				<BackButton url={`/${location}`} text={location} />
 				<Link href={`/${location}/${subloc}/report`}>
-					<Button style={{ marginRight: "1em" }} variant='outline' compact radius='sm' color='red'>
-						<Text weight={350}>Report an issue</Text>
+					<Button style={{ marginRight: "1em" }} variant='light' compact radius='sm' color='red'>
+						<Flag size={15} />
+						<Space w={2} />
+						<Text weight={500} size="sm">Report Issue</Text>
 					</Button>
 				</Link>
 			</Group>
@@ -180,10 +185,30 @@ export default function SubLocation() {
 
 function SubLocationIssues({ issues, mutate }) {
 	return (<>
-		<Text style={{ margin: "0.75em 0 0.75em 0" }} size="sm" color="gray">Issues</Text>
 		{
 			issues.length === 0 ?
-				<Text weight={300}>This area has no reported issues!</Text> :
+				<>
+					<Divider size="sm" mt={15} mb={5}
+						labelPosition="center"
+						label={
+							<>
+								<Box sx={(theme) => ({
+									textAlign: 'center',
+									width: 180
+								})}>
+									<Text
+										weight={450}
+										size="xs"
+										color="black"
+									>
+										Notify other users of any issues here with the report button.
+									</Text>
+								</Box>
+							</>
+						}
+					/>
+				</>
+				:
 				(<Stack mb={20} spacing={7} align="right">
 					{issues.map(
 						(issue) => (

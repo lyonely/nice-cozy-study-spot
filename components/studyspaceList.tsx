@@ -111,6 +111,7 @@ export default function StudySpaceList() {
                 direction="row"
                 position="apart"
                 spacing="xs"
+                align="flex-start"
                 style={{ margin: '0 0.5em 0.5em 0.5em' }}
             >
                 <Select

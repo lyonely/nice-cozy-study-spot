@@ -1,6 +1,8 @@
 import { Container, Space, Button } from '@mantine/core'
 import RoundPaper from '../components/RoundPaper'
 import Link from 'next/link'
+import { setCookie, getCookie } from 'typescript-cookie'
+import { useEffect } from 'react'
 
 export default function LandingPage() {
 	const mainContent = () => {
@@ -26,6 +28,13 @@ export default function LandingPage() {
 			</div>
 		)
 	}
+
+	useEffect(() => {
+		const value = getCookie('favourites')
+		if (!value) {
+			setCookie('favourites', 'indexes', { expires: 7 })
+		}
+	})
 
 	return (
 		<Container>

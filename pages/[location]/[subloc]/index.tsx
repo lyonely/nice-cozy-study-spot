@@ -14,24 +14,23 @@ import {
 	Container,
 	Image,
 	Space,
-	Anchor,
 	Stack,
 	Modal,
 	Button,
 	Divider,
+	Box,
 } from '@mantine/core'
 import CapacityTag from '../../../components/CapacityTag'
 import {
-	AlertCircle,
 	Armchair,
 	CircleCheck,
 	CircleOff,
 	FileDescription,
 	Map2,
 	Pencil,
-	MessageReport,
+
 	LockAccess,
-	ThumbUp
+	Flag
 } from 'tabler-icons-react'
 import BackButton from '../../../components/BackButton'
 import LoadingCircle from '../../../components/LoadingCircle'
@@ -57,8 +56,10 @@ export default function SubLocation() {
 			<Group position='apart'>
 				<BackButton url={`/${location}`} text={location} />
 				<Link href={`/${location}/${subloc}/report`}>
-					<Button style={{ marginRight: "1em" }} variant='outline' compact radius='sm' color='red'>
-						<Text weight={350}>Report an issue</Text>
+					<Button style={{ marginRight: "1em" }} variant='light' compact radius='sm' color='red'>
+						<Flag size={15} />
+						<Space w={2} />
+						<Text weight={500} size="sm">Report Issue</Text>
 					</Button>
 				</Link>
 			</Group>
@@ -165,9 +166,12 @@ export default function SubLocation() {
 							</ThemeIcon>
 						}
 					>
-						<Text>
-							Here are specific directions to help locate this
-							area... ᕙ( •̀ ᗜ •́ )ᕗ
+						<Text mb={7} size="sm" weight={500}>
+							Here are specific directions to help locate this area ...
+						</Text>
+						{getDirections(data.directions)}
+						<Text mt={7} size="sm" weight={500}>
+							... and you've reached your destination!
 						</Text>
 					</Accordion.Item>
 				</Accordion>
@@ -180,17 +184,77 @@ export default function SubLocation() {
 
 function SubLocationIssues({ issues, mutate }) {
 	return (<>
-		<Text style={{ margin: "0.75em 0 0.75em 0" }} size="sm" color="gray">Issues</Text>
 		{
 			issues.length === 0 ?
-				<Text weight={300}>This area has no reported issues!</Text> :
+				<>
+					<Divider size="sm" mt={15} mb={5}
+						labelPosition="center"
+						label={
+							<>
+								<Box sx={(theme) => ({
+									textAlign: 'center',
+									width: 180
+								})}>
+									<Text
+										weight={450}
+										size="xs"
+										color="black"
+									>
+										Notify other users of any issues here with the report button.
+									</Text>
+								</Box>
+							</>
+						}
+					/>
+				</>
+				:
 				(<Stack mb={20} spacing={7} align="right">
+					<Divider size="sm" mt={15} mb={5} color="red"
+						labelPosition="center"
+						label={
+							<>
+								<Box sx={(theme) => ({
+									textAlign: 'center',
+									width: 210
+								})}>
+									<Text
+										weight={500}
+										size="xs"
+										color="red"
+									>
+										There are currently some issues here!
+									</Text>
+								</Box>
+							</>
+						}
+					/>
 					{issues.map(
 						(issue) => (
 							<IssueAlert mutate={mutate} issue={issue} />
 						))}
+
+					<Text
+						weight={400}
+						size="xs"
+						color="gray"
+						ml={3}
+					>
+						Click into the issue to view details or mark it as resolved.
+					</Text>
+
 				</Stack>)
 		}</>)
+}
+
+function getDirections(directions) {
+	const dirList = directions.split(".");
+	return (
+		<>{dirList.map(
+			direction => (<Text size="sm">{direction}</Text>))
+		}
+		</>
+
+	)
 }
 
 function cardAccessNeeded(cardAccess) {

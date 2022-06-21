@@ -73,7 +73,7 @@ export default function SubLocation() {
 			>
 				<Card.Section>
 					<Image
-						height={160}
+						height={140}
 						src={data.locations.picture}
 						alt={data.locations.name}
 					></Image>
@@ -192,8 +192,8 @@ export default function SubLocation() {
 // }
 
 function SubLocationIssues({ issues, mutate }) {
-	return (<>
-		<Text weight={500}>Issues</Text>
+	return (<div style={{ marginTop: "0.75em" }}>
+		<Text size="sm" color="gray">Issues</Text>
 		{
 			issues.length === 0 ?
 				<Text weight={300}>This area has no reported issues!</Text> :
@@ -201,7 +201,7 @@ function SubLocationIssues({ issues, mutate }) {
 					{issues.map((issue) => <IssueAlert mutate={mutate} issue={issue} />)
 					}
 				</Stack>)
-		}</>)
+		}</div>)
 }
 
 function cardAccessNeeded(cardAccess) {

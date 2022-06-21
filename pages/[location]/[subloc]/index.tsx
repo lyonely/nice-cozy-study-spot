@@ -13,6 +13,12 @@ import {
 	Alert,
 	Container,
 	Image,
+	Space,
+	Anchor,
+	Stack,
+	Modal,
+	Button,
+	Divider,
 } from '@mantine/core'
 import CapacityTag from '../../../components/CapacityTag'
 import {
@@ -23,11 +29,15 @@ import {
 	FileDescription,
 	Map2,
 	Pencil,
+	MessageReport,
+	LockAccess,
+	ThumbUp
 } from 'tabler-icons-react'
 import BackButton from '../../../components/BackButton'
 import LoadingCircle from '../../../components/LoadingCircle'
 import { useUser } from '@auth0/nextjs-auth0'
 import StarButton from '../../../components/StarButton'
+import IssueAlert from '../../../components/IssueAlert'
 
 export default function SubLocation() {
 	const router = useRouter()
@@ -40,6 +50,19 @@ export default function SubLocation() {
 	useEffect(() => {
 		console.log(data)
 	}, [data])
+
+	// TEMPORARY for problem reporting
+	// const [issues, setIssues] = useState([])
+	const issues = [
+		{
+			title: "Faulty Socket",
+			description: "Socket seems to be broken"
+		},
+		{
+			title: "Missing Chair",
+			description: "Missing Swivel Chair :("
+		}
+	]
 
 	return data ? (
 		<Container>
@@ -89,9 +112,14 @@ export default function SubLocation() {
 						Daily Capacity Trends
 					</Text>
 					<CapacityGraph datapoints={data.trend_capacity} />
-
-					{cardAccessNeeded(data.card_access_needed)}
+					<Space />
 				</Group>
+
+				<Stack spacing={0}>
+					{displayAnyIssues(issues)}
+					{cardAccessNeeded(data.card_access_needed)}
+				</Stack>
+
 				<Accordion offsetIcon={false}>
 					<Accordion.Item
 						label="Description"
@@ -149,6 +177,13 @@ export default function SubLocation() {
 						</Text>
 					</Accordion.Item>
 				</Accordion>
+
+				<Group mt={20} mb={15} spacing={0}>
+					<Text size="sm" mb={0}>
+						See any problems (E.g. faulty sockets, missing whiteboards)
+						in this space? {reportIssuesAnchor()}
+					</Text>
+				</Group>
 			</Card>
 		</Container>
 	) : (
@@ -156,18 +191,46 @@ export default function SubLocation() {
 	)
 }
 
+// TODO: link this to the page for reporting issues
+function reportIssuesAnchor() {
+	return (<Anchor
+		mb={10}
+		underline
+		size="sm"
+		href="https://mantine.dev/"
+		target="_blank"
+		color="red">
+		Report any issues here.
+	</Anchor>)
+}
+
+function displayAnyIssues(issues) {
+	if (issues.size != 0) {
+		return (
+			<Stack mb={20} spacing={7} align="right">
+				{issues.map((issue) => (<IssueAlert issue={issue} />))
+				}
+			</Stack>)
+	}
+}
+
 function cardAccessNeeded(cardAccess) {
 	if (cardAccess) {
 		return (
-			<Alert
-				mt="md"
-				mb="md"
-				icon={<AlertCircle size={16} />}
-				title="Card Access Required"
-				color="red"
-			>
-				A staff or departmental card is needed to access this space.
-			</Alert>
+			<Group grow>
+				<Alert
+					mb="md"
+					icon={<LockAccess size={16} />}
+					title="Card Access Required "
+					color="beige"
+					radius="md"
+				>
+					A staff or departmental card is needed to access this space.
+				</Alert>
+
+			</Group>
+
+
 		)
 	}
 }

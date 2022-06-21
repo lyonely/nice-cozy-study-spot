@@ -2,6 +2,7 @@ import { Card, Text, Group, } from '@mantine/core'
 import Link from 'next/link'
 import { subCapacity } from '../utils/capacity'
 import CapacityBar from './CapacityBar'
+import CapacityTag from './CapacityTag'
 export default function SubLocationSearchCard({ sub_location }) {
 	console.log(sub_location)
 	const { name, locations } = sub_location
@@ -32,9 +33,9 @@ export default function SubLocationSearchCard({ sub_location }) {
 					>
 						capacity
 					</Text>
-					<CapacityBar
-						capacity={subCapacity(sub_location)}
-						isSubLocation={false}
+					<CapacityTag
+						current={sub_location.capacity}
+						max={sub_location.max_capacity}
 					/>
 				</Group>
 			</Link>

@@ -1,6 +1,6 @@
 import { Divider, Modal, Text, Button, Space, Group } from "@mantine/core";
 import { useState } from "react";
-import { MessageReport, Separator, ThumbUp } from "tabler-icons-react";
+import { MessageReport, Dots, ThumbUp } from "tabler-icons-react";
 
 export default function IssueAlert({ issue, mutate }) {
 	const [opened, setOpened] = useState(false);
@@ -52,11 +52,15 @@ export default function IssueAlert({ issue, mutate }) {
 					color="red"
 					radius="md"
 					variant="light"
+					leftIcon={<MessageReport size={16} />}
+					rightIcon={<Dots size={16} />}
+					classNames={{
+						inner: "sublocation__button",
+						label: "sublocation__label"
+					}}
 				>
-					<Space w={7} />
-					<MessageReport size={16} />
-					<Space w={13} />
 					{issue.subject}
+
 				</Button>
 			</Group>
 		</>

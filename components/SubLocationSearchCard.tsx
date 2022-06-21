@@ -8,12 +8,13 @@ export default function SubLocationSearchCard({ sub_location }) {
 
 	return (
 		<Card
-			shadow="sm"
+			shadow="md"
 			radius="lg"
 			p="md"
 			withBorder
 			style={{
-				margin: "0.75em 0.5em 0.75em 0.5em",
+				margin: '0.75em 0.5em 0.75em 0.5em',
+				boxShadow: '2px 2px 3px',
 			}}
 		>
 			<Link href={`${locations.name}/${name}`} passHref>

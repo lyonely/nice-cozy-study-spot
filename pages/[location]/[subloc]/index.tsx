@@ -178,19 +178,6 @@ export default function SubLocation() {
 	)
 }
 
-// // TODO: link this to the page for reporting issues
-// function reportIssuesAnchor(location, sublocation) {
-// 	return (<Anchor
-// 		mb={10}
-// 		underline
-// 		size="sm"
-// 		href={`/${location}/${sublocation}/report`}
-// 		target="_blank"
-// 		color="red">
-// 		Report any issues here.
-// 	</Anchor>)
-// }
-
 function SubLocationIssues({ issues, mutate }) {
 	return (<div style={{ marginTop: "0.75em" }}>
 		<Text size="sm" color="gray">Issues</Text>

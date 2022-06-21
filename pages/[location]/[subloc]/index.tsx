@@ -210,10 +210,39 @@ function SubLocationIssues({ issues, mutate }) {
 				</>
 				:
 				(<Stack mb={20} spacing={7} align="right">
+					<Divider size="sm" mt={15} mb={5} color="red"
+						labelPosition="center"
+						label={
+							<>
+								<Box sx={(theme) => ({
+									textAlign: 'center',
+									width: 210
+								})}>
+									<Text
+										weight={500}
+										size="xs"
+										color="red"
+									>
+										There are currently some issues here!
+									</Text>
+								</Box>
+							</>
+						}
+					/>
 					{issues.map(
 						(issue) => (
 							<IssueAlert mutate={mutate} issue={issue} />
 						))}
+
+					<Text
+						weight={400}
+						size="xs"
+						color="gray"
+						ml={3}
+					>
+						Click into the issue to view details or mark it as resolved.
+					</Text>
+
 				</Stack>)
 		}</>)
 }

@@ -37,6 +37,7 @@ import BackButton from '../../../components/BackButton'
 import LoadingCircle from '../../../components/LoadingCircle'
 import { useUser } from '@auth0/nextjs-auth0'
 import StarButton from '../../../components/StarButton'
+import IssueAlert from '../../../components/IssueAlert'
 
 export default function SubLocation() {
 	const router = useRouter()
@@ -207,57 +208,11 @@ function displayAnyIssues(issues) {
 	if (issues.size != 0) {
 		return (
 			<Stack mb={20} spacing={7} align="right">
-				{issues.map(i =>
-					<>{displayIssue(i)} </>)
+				{issues.map((issue) => (<IssueAlert issue={issue} />))
 				}
 			</Stack>)
 	}
 }
-
-function displayIssue(issue) {
-	const [opened, setOpened] = useState(false);
-	return (
-		<>
-			<Modal
-				opened={opened}
-				onClose={() => setOpened(false)}
-				withCloseButton={false}
-			>
-				{issue.description}
-				<Divider mt="sm" />
-				<Text size="xs" mt={3} mb={3} >
-					If the issue seems to be resolved, please remove it to notify other users.
-				</Text>
-				<Button
-					color="blue"
-					variant="light"
-				>
-					<ThumbUp />
-					<Space w={3} />
-					Mark as Resolved
-				</Button>
-			</Modal>
-
-			<Group>
-				<Button
-					fullWidth
-					compact
-					onClick={() => setOpened(true)}
-					color="red"
-					radius="md"
-					variant="light"
-				>
-					<Space w={7} />
-					<MessageReport size={16} />
-					<Space w={13} />
-					{issue.title}
-				</Button>
-			</Group>
-		</>
-	)
-
-}
-
 
 function cardAccessNeeded(cardAccess) {
 	if (cardAccess) {

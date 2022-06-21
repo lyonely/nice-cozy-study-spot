@@ -44,25 +44,12 @@ export default function SubLocation() {
 	const {
 		query: { location, subloc },
 	} = router
-	const { data, error } = useSWR(`/api/${location}/${subloc}`, fetcher)
+	const { data, error, mutate } = useSWR(`/api/${location}/${subloc}`, fetcher)
 	const { user } = useUser()
 
 	useEffect(() => {
 		console.log(data)
 	}, [data])
-
-	// TEMPORARY for problem reporting
-	// const [issues, setIssues] = useState([])
-	const issues = [
-		{
-			title: "Faulty Socket",
-			description: "Socket seems to be broken"
-		},
-		{
-			title: "Missing Chair",
-			description: "Missing Swivel Chair :("
-		}
-	]
 
 	return data ? (
 		<Container>
@@ -116,7 +103,7 @@ export default function SubLocation() {
 				</Group>
 
 				<Stack spacing={0}>
-					{displayAnyIssues(issues)}
+					{displayAnyIssues(data.issues, mutate)}
 					{cardAccessNeeded(data.card_access_needed)}
 				</Stack>
 
@@ -181,7 +168,7 @@ export default function SubLocation() {
 				<Group mt={20} mb={15} spacing={0}>
 					<Text size="sm" mb={0}>
 						See any problems (E.g. faulty sockets, missing whiteboards)
-						in this space? {reportIssuesAnchor()}
+						in this space? {reportIssuesAnchor(location, subloc)}
 					</Text>
 				</Group>
 			</Card>
@@ -192,23 +179,23 @@ export default function SubLocation() {
 }
 
 // TODO: link this to the page for reporting issues
-function reportIssuesAnchor() {
+function reportIssuesAnchor(location, sublocation) {
 	return (<Anchor
 		mb={10}
 		underline
 		size="sm"
-		href="https://mantine.dev/"
+		href={`/${location}/${sublocation}/report`}
 		target="_blank"
 		color="red">
 		Report any issues here.
 	</Anchor>)
 }
 
-function displayAnyIssues(issues) {
+function displayAnyIssues(issues, mutate) {
 	if (issues.size != 0) {
 		return (
 			<Stack mb={20} spacing={7} align="right">
-				{issues.map((issue) => (<IssueAlert issue={issue} />))
+				{issues.map((issue) => (!issue.resolved && <IssueAlert mutate={mutate} issue={issue} />))
 				}
 			</Stack>)
 	}

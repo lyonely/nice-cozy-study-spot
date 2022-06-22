@@ -134,7 +134,7 @@ export default function StudySpaceList() {
 					style={{ maxWidth: '55%' }}
 				/>
 			</Group>
-			{favourites && favourites.length > 0 && !term && filters.length == 0 && (
+            {favourites && favourites.length > 0 && !sortOrder && !term && filters.length == 0 && (
 				<>
 					<Text size="xs" align="center" color="gray">
 						Favourites

@@ -3,13 +3,9 @@ import { MapPin } from 'react-feather'
 import Link from 'next/link'
 import { useViewportSize } from '@mantine/hooks'
 import { AppTheme } from '../style/AppTheme'
-import { useUser } from '@auth0/nextjs-auth0'
 
 export default function TopBar() {
-	console.log(process.env.AUTH0_BASE_URL)
 	const { height, width } = useViewportSize()
-	const { user, error, isLoading } = useUser()
-	console.log(user)
 	return (
 		<div style={{ display: 'flex', justifyContent: 'center' }}>
 			<div

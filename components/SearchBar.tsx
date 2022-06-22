@@ -21,6 +21,7 @@ export default function SearchBar({ term, setTerm }) {
         )
     }
 
+<<<<<<< HEAD
     return (
         <TextInput
             ref={searchRef}
@@ -36,4 +37,26 @@ export default function SearchBar({ term, setTerm }) {
             style={{ margin: '0.75em 0.5em 0.5em 0.5em' }}
         />
     )
+=======
+	const ClearSearch = ({ value }) => {
+		return (<X strokeWidth='xs' color="gray" size="18px" onClick={
+			() => {
+				searchRef.current.value = null
+				setTerm([])
+			}} />)
+	}
+
+	return (
+		<TextInput ref={searchRef} onChange={(event) => {
+			setTerm(event.currentTarget.value)
+		}}
+			type="search"
+			radius="md"
+			placeholder="Search Study Location"
+			icon={<Search size={14} />}
+			rightSection={term ? <ClearSearch value={this} /> : <></>}
+			style={{ margin: "0.75em 0.5em 0.5em 0.5em" }}
+		/>
+	);
+>>>>>>> feat: favourite tab in studylocation list
 }

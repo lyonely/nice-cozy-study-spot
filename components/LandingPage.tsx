@@ -28,14 +28,6 @@ export default function LandingPage() {
 			</div>
 		)
 	}
-
-	useEffect(() => {
-		const value = getCookie('favourites')
-		if (!value) {
-			setCookie('favourites', 'indexes', { expires: 7 })
-		}
-	})
-
 	return (
 		<Container>
 			<div>

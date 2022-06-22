@@ -35,14 +35,41 @@ const allFilters = () => {
 }
 
 export default function StudySpaceList() {
+	const [favourites, setFavourites] = useState<any[]>([])
 	const [data, setData] = useState<any[]>([])
 	const [subLocData, setSubLocData] = useState<any[]>()
-	const { user } = useUser()
+
 	const {
 		filter: { filters, setFilters },
 		search: { term, setTerm },
 		sort: { sortOrder, setSortOrder },
 	} = useAppContext()
+
+	useEffect(() => {
+		const arr = getCookie('favourites')
+		if (arr) {
+			const newarr = arr.split(',')
+			newarr.shift()
+			fetchFavourites(newarr)
+		}
+	}, [])
+
+	const fetchFavourites = async (arr) => {
+
+		console.log(`fetch params:`)
+		console.log(arr.length)
+		if (arr.length === 0) {
+			return
+		}
+		const resp = await fetch(`/api/favouriteSl`, {
+			method: 'POST',
+			body: JSON.stringify({ ids: arr }),
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		})
+		setFavourites(await resp.json())
+	}
 
 	const fetchLocations = async () => {
 		if (filters.length === 0) {
@@ -70,19 +97,13 @@ export default function StudySpaceList() {
 	}
 
 	useEffect(() => {
-		console.log(filters)
-	}, [filters])
-
-	useEffect(() => {
-		console.log(data)
-		console.log(subLocData)
-	}, [data])
+		console.log(favourites)
+	}, [favourites])
 
 	useEffect(() => {
 		fetchLocations()
 		if (term || filters.length > 0) {
 			fetchSubLocations()
-			console.log(term)
 		}
 	}, [term, filters])
 	return data ? (
@@ -113,51 +134,57 @@ export default function StudySpaceList() {
 					style={{ maxWidth: '55%' }}
 				/>
 			</Group>
-			{arr && arr.length !== 0 && (
+			{favourites && favourites.length > 0 && !term && filters.length == 0 && (
 				<>
 					<Text size="xs" align="center" color="gray">
 						Favourites
 					</Text>
-					{arr
+					{favourites
 						.map((sl) => (
 							<SubLocationSearchCard
 								sub_location={sl}
 								key={sl.name}
 							/>
-						))}
+						))
+					}
 				</>
-			)}
-			{data && data.length !== 0 && (
-				<>
-					<Text size="md" align="center" color="gray">
-						Locations
-					</Text>
-					{data
-						.sort((x, y) => compareLocations(x, y, sortOrder))
-						.map((location) => (
-							<LocationListCard
-								location={location}
-								key={location.name}
-							/>
-						))}
-				</>
-			)}
-			{subLocData && subLocData.length !== 0 && (
-				<>
-					<Text size="xs" align="center" color="gray">
-						Sub Locations
-					</Text>
-					{subLocData
-						.sort((x, y) => compareSubLocations(x, y, sortOrder))
-						.map((sl) => (
-							<SubLocationSearchCard
-								sub_location={sl}
-								key={sl.name}
-							/>
-						))}
-				</>
-			)}
-		</Container>
+			)
+			}
+			{
+				data && data.length !== 0 && (
+					<>
+						<Text size="md" align="center" color="gray">
+							Locations
+						</Text>
+						{data
+							.sort((x, y) => compareLocations(x, y, sortOrder))
+							.map((location) => (
+								<LocationListCard
+									location={location}
+									key={location.name}
+								/>
+							))}
+					</>
+				)
+			}
+			{
+				subLocData && subLocData.length !== 0 && (
+					<>
+						<Text size="xs" align="center" color="gray">
+							Sub Locations
+						</Text>
+						{subLocData
+							.sort((x, y) => compareSubLocations(x, y, sortOrder))
+							.map((sl) => (
+								<SubLocationSearchCard
+									sub_location={sl}
+									key={sl.name}
+								/>
+							))}
+					</>
+				)
+			}
+		</Container >
 	) : (
 		<LoadingCircle />
 	)

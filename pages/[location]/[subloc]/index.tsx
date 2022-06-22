@@ -34,7 +34,6 @@ import {
 } from 'tabler-icons-react'
 import BackButton from '../../../components/BackButton'
 import LoadingCircle from '../../../components/LoadingCircle'
-import { useUser } from '@auth0/nextjs-auth0'
 import StarButton from '../../../components/StarButton'
 import IssueAlert from '../../../components/IssueAlert'
 import Link from 'next/link'
@@ -45,7 +44,6 @@ export default function SubLocation() {
 		query: { location, subloc },
 	} = router
 	const { data, error, mutate } = useSWR(`/api/${location}/${subloc}`, fetcher)
-	const { user } = useUser()
 
 	useEffect(() => {
 		console.log(data)

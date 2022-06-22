@@ -3,16 +3,26 @@ import {
 	Card,
 	Container,
 	Group,
+	Select,
 	Text,
 	Textarea,
 	TextInput,
 } from '@mantine/core'
 import { useForm } from '@mantine/form'
 import { useRouter } from 'next/router'
+import { useState } from 'react'
 import useSWR from 'swr'
 import BackButton from '../../../components/BackButton'
 import LoadingCircle from '../../../components/LoadingCircle'
 import { fetcher } from '../../../utils/fetcher'
+
+const reportOptions = [
+	{ value: 'Washroom Issue', label: 'Washroom' },
+	{ value: 'Noise Level Issue', label: 'Noise Level' },
+	{ value: 'Temperature Issue', label: 'Temperature' },
+	{ value: 'Amenity Issue', label: 'Amenity' },
+	{ value: 'Other Issue', label: 'Other' },
+]
 
 /*
  * Request body:
@@ -27,15 +37,22 @@ export default function Report(
 		query: { location, subloc },
 	} = router
 	const { data, error } = useSWR(`/api/${location}/${subloc}`, fetcher)
+	const [submitting, setSubmitting] = useState(false)
 
-	const form = useForm({
+	const form = useForm<{
+		subject: string, description: string | undefined
+	}>({
 		initialValues: {
 			subject: "",
 			description: "",
-		}
+		},
+		validate: (values) => ({
+			subject: !values.subject ? 'Please select an issue' : null
+		}),
 	})
 
 	const handleSubmit = async (values) => {
+		setSubmitting(true)
 		const req = {
 			body: JSON.stringify({
 				...values,
@@ -68,15 +85,18 @@ export default function Report(
 						<Text weight={600} size="xl">
 							Report Issue for {subloc}
 						</Text>
-						<TextInput
-							label="Title"
-							placeholder="Brief summary of issue"
+						<Select
+							disabled={submitting}
 							required
-							radius="md"
+							label="What seems to be the problem?"
+							placeholder="Click me to select an issue"
+							clearable
 							style={{ width: '100%' }}
-							{...form.getInputProps('subject')}
-						></TextInput>
+							radius="md"
+							data={reportOptions}
+							{...form.getInputProps('subject')} />
 						<Textarea
+							disabled={submitting}
 							label="Description (Optional)"
 							placeholder="Details of the issue"
 							minRows={10}
@@ -86,7 +106,7 @@ export default function Report(
 							style={{ width: '100%' }}
 							{...form.getInputProps('description')}
 						></Textarea>
-						<Button type="submit" color="yellow" radius="md">
+						<Button disabled={submitting} type="submit" color="yellow" radius="md">
 							Submit
 						</Button>
 					</Group>

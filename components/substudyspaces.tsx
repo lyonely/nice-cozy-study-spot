@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { Text, Button, Group } from '@mantine/core'
 import CapacityTag from './CapacityTag'
-import { CaretRight } from 'tabler-icons-react'
+import { ChevronRight } from 'tabler-icons-react'
 
 export default function SubStudySpaces({ location, sub_locations }) {
 	return sub_locations.map((sub) => {
@@ -19,7 +19,7 @@ export default function SubStudySpaces({ location, sub_locations }) {
 					radius="md"
 					variant="light"
 					color="yellow"
-					rightIcon={<CaretRight size={16} />}
+					rightIcon={<ChevronRight size={16} />}
 					style={{
 						height: 'auto',
 						marginBottom: '0.45em',

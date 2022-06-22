@@ -4,10 +4,9 @@ import CapacityBar from './CapacityBar'
 import { locationCapacity } from '../utils/capacity'
 import OpeningHours from './OpeningHours'
 import moment from 'moment'
-import StarButton from './StarButton'
 
 export default function LocationPageCard({ location, user }) {
-    const { picture, name, sub_locations, index } = location
+    const { picture, name, sub_locations } = location
 
     return (
         <Card
@@ -32,7 +31,6 @@ export default function LocationPageCard({ location, user }) {
                     <Text weight={600} size="xl">
                         {name}
                     </Text>
-                    <StarButton index={index} is_parent_location={true} />
                 </Group>
                 <Text size="sm" color="gray" style={{ paddingLeft: '0.5em' }}>
                     capacity

@@ -89,7 +89,7 @@ export default function SubLocation() {
 						<Text weight={600} size="xl">
 							{subloc}
 						</Text>
-						<StarButton index={data.index} is_parent_location={false} />
+						<StarButton index={data.index} />
 					</Group>
 
 					<Group>

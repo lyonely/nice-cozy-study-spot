@@ -3,10 +3,9 @@ import { useEffect, useState } from 'react'
 import { Star } from 'tabler-icons-react'
 import { getCookie, setCookie, removeCookie } from 'typescript-cookie'
 
-export default function StarButton({ index, is_parent_location }) {
+export default function StarButton({ index }) {
 
-    const id = (is_parent_location) ? index : (100 - index)
-    const inside = getCookie('favourites').split(',').includes((id || "hi").toString())
+    const inside = getCookie('favourites').split(',').includes((index || "hi").toString())
 
     const [saved, setSaved] = useState(inside)
 
@@ -21,10 +20,10 @@ export default function StarButton({ index, is_parent_location }) {
                 const arr = value.split(',')
                 if (saved) {
                     arr.forEach((element, i) => {
-                        if (element == id.toString()) arr.splice(i, 1)
+                        if (element == index.toString()) arr.splice(i, 1)
                     })
                 } else {
-                    arr.push(id)
+                    arr.push(index)
                 }
                 let joined = arr.join()
                 removeCookie('favourites')

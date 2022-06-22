@@ -14,7 +14,7 @@ import {
     Trees,
 } from 'tabler-icons-react'
 
-export default function LocationListCard({ location, user }) {
+export default function LocationListCard({ location }) {
     const { name, sub_locations } = location
 
     return (

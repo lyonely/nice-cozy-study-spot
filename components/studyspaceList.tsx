@@ -122,6 +122,7 @@ export default function StudySpaceList() {
 					onChange={setSortOrder}
 					data={allSortOrders()}
 					style={{ maxWidth: '27%' }}
+                    clearable
 				/>
 				<MultiSelect
 					placeholder="Filter by:"

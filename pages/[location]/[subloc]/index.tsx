@@ -166,13 +166,7 @@ export default function SubLocation() {
 							</ThemeIcon>
 						}
 					>
-						<Text mb={7} size="sm" weight={500}>
-							Here are specific directions to help locate this area ...
-						</Text>
 						{getDirections(data.directions)}
-						<Text mt={7} size="sm" weight={500}>
-							... and you've reached your destination!
-						</Text>
 					</Accordion.Item>
 				</Accordion>
 			</Card>
@@ -251,10 +245,18 @@ function SubLocationIssues({ issues, mutate }) {
 
 function getDirections(directions) {
 	const dirList = ((directions) ? directions : "").split(".");
+
 	return (
-		<>{dirList.map(
-			direction => (<Text size="sm">{direction}</Text>))
-		}
+		<>
+			<Text mb={7} size="sm" weight={500}>
+				Here are specific directions to help locate this area ...
+			</Text>
+			{dirList.map(
+				direction => (<Text size="sm">{direction}</Text>))
+			}
+			<Text mt={7} size="sm" weight={500}>
+				... and you've reached your destination!
+			</Text>
 		</>
 
 	)
@@ -346,16 +348,16 @@ function subLocStudySpaces(sublocation) {
 		<div>
 			<List spacing="xs" size="sm" center>
 				<List.Item icon={listIcon(breakout_space_available)}>
-					Breakout Space Available
+					Breakout Space
 				</List.Item>
 				<List.Item icon={listIcon(silent_study_available)}>
-					Silent Study Available
+					Silent Study Area
 				</List.Item>
 				<List.Item icon={listIcon(quiet_study_available)}>
-					Quiet Study Available
+					Quiet Study Area
 				</List.Item>
 				<List.Item icon={listIcon(group_study_available)}>
-					Group Study Available
+					Group Study Area
 				</List.Item>
 			</List>
 		</div>

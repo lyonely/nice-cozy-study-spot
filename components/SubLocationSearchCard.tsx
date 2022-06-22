@@ -4,7 +4,6 @@ import { subCapacity } from '../utils/capacity'
 import CapacityBar from './CapacityBar'
 import CapacityTag from './CapacityTag'
 export default function SubLocationSearchCard({ sub_location }) {
-	console.log(sub_location)
 	const { name, locations } = sub_location
 
 	return (

@@ -3,6 +3,7 @@ import {
 	Card,
 	Container,
 	Group,
+	Select,
 	Text,
 	Textarea,
 	TextInput,
@@ -13,6 +14,14 @@ import useSWR from 'swr'
 import BackButton from '../../../components/BackButton'
 import LoadingCircle from '../../../components/LoadingCircle'
 import { fetcher } from '../../../utils/fetcher'
+
+const reportOptions = [
+	{ value: 'Washroom Issue', label: 'Washroom' },
+	{ value: 'Noise Level Issue', label: 'Noise Level' },
+	{ value: 'Temperature Issue', label: 'Temperature' },
+	{ value: 'Amenity Issue', label: 'Amenity' },
+	{ value: 'Other Issue', label: 'Other' },
+]
 
 /*
  * Request body:
@@ -28,11 +37,16 @@ export default function Report(
 	} = router
 	const { data, error } = useSWR(`/api/${location}/${subloc}`, fetcher)
 
-	const form = useForm({
+	const form = useForm<{
+		subject: string, description: string | undefined
+	}>({
 		initialValues: {
 			subject: "",
 			description: "",
-		}
+		},
+		validate: (values) => ({
+			subject: !values.subject ? 'Please select an issue' : null
+		}),
 	})
 
 	const handleSubmit = async (values) => {
@@ -68,14 +82,15 @@ export default function Report(
 						<Text weight={600} size="xl">
 							Report Issue for {subloc}
 						</Text>
-						<TextInput
-							label="Title"
-							placeholder="Brief summary of issue"
+						<Select
 							required
-							radius="md"
+							label="What seems to be the problem?"
+							placeholder="Click me to select an issue"
+							clearable
 							style={{ width: '100%' }}
-							{...form.getInputProps('subject')}
-						></TextInput>
+							radius="md"
+							data={reportOptions}
+							{...form.getInputProps('subject')} />
 						<Textarea
 							label="Description (Optional)"
 							placeholder="Details of the issue"

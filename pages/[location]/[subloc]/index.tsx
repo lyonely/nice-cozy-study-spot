@@ -346,16 +346,16 @@ function subLocStudySpaces(sublocation) {
 		<div>
 			<List spacing="xs" size="sm" center>
 				<List.Item icon={listIcon(breakout_space_available)}>
-					Breakout Space Available
+					Breakout Space
 				</List.Item>
 				<List.Item icon={listIcon(silent_study_available)}>
-					Silent Study Available
+					Silent Study Area
 				</List.Item>
 				<List.Item icon={listIcon(quiet_study_available)}>
-					Quiet Study Available
+					Quiet Study Area
 				</List.Item>
 				<List.Item icon={listIcon(group_study_available)}>
-					Group Study Available
+					Group Study Area
 				</List.Item>
 			</List>
 		</div>

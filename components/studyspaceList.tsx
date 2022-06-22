@@ -36,12 +36,14 @@ const allFilters = () => {
 }
 
 export default function StudySpaceList() {
-    const [term, setTerm] = useState('')
     const [data, setData] = useState<any[]>([])
     const [subLocData, setSubLocData] = useState<any[]>()
     const { user } = useUser()
-    const [sortOrder, setSortOrder] = useState('')
-    const { filters, setFilters } = useAppContext()
+    const {
+        filter: { filters, setFilters },
+        search: { term, setTerm },
+        sort: { sortOrder, setSortOrder },
+    } = useAppContext()
 
     const fetchLocations = async () => {
         if (filters.length === 0) {

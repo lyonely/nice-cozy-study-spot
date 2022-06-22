@@ -178,7 +178,10 @@ export default function SubLocation() {
 			</Card>
 		</Container>
 	) : (
-		<LoadingCircle />
+		<Container>
+			<BackButton url={`/${location}`} text={location} />
+			<LoadingCircle />
+		</Container>
 	)
 }
 

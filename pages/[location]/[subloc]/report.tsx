@@ -10,6 +10,7 @@ import {
 } from '@mantine/core'
 import { useForm } from '@mantine/form'
 import { useRouter } from 'next/router'
+import { useState } from 'react'
 import useSWR from 'swr'
 import BackButton from '../../../components/BackButton'
 import LoadingCircle from '../../../components/LoadingCircle'
@@ -36,6 +37,7 @@ export default function Report(
 		query: { location, subloc },
 	} = router
 	const { data, error } = useSWR(`/api/${location}/${subloc}`, fetcher)
+	const [submitting, setSubmitting] = useState(false)
 
 	const form = useForm<{
 		subject: string, description: string | undefined
@@ -50,6 +52,7 @@ export default function Report(
 	})
 
 	const handleSubmit = async (values) => {
+		setSubmitting(true)
 		const req = {
 			body: JSON.stringify({
 				...values,
@@ -83,6 +86,7 @@ export default function Report(
 							Report Issue for {subloc}
 						</Text>
 						<Select
+							disabled={submitting}
 							required
 							label="What seems to be the problem?"
 							placeholder="Click me to select an issue"
@@ -92,6 +96,7 @@ export default function Report(
 							data={reportOptions}
 							{...form.getInputProps('subject')} />
 						<Textarea
+							disabled={submitting}
 							label="Description (Optional)"
 							placeholder="Details of the issue"
 							minRows={10}
@@ -101,7 +106,7 @@ export default function Report(
 							style={{ width: '100%' }}
 							{...form.getInputProps('description')}
 						></Textarea>
-						<Button type="submit" color="yellow" radius="md">
+						<Button disabled={submitting} type="submit" color="yellow" radius="md">
 							Submit
 						</Button>
 					</Group>

@@ -19,6 +19,9 @@ import {
 	Button,
 	Divider,
 	Box,
+	Grid,
+	Center,
+	BackgroundImage,
 } from '@mantine/core'
 import CapacityTag from '../../../components/CapacityTag'
 import {
@@ -53,13 +56,6 @@ export default function SubLocation() {
 		<Container>
 			<Group position='apart'>
 				<BackButton url={`/${location}`} text={location} />
-				<Link href={`/${location}/${subloc}/report`}>
-					<Button style={{ marginRight: "1em" }} variant='light' compact radius='sm' color='red'>
-						<Flag size={15} />
-						<Space w={2} />
-						<Text weight={500} size="sm">Report Issue</Text>
-					</Button>
-				</Link>
 			</Group>
 			<Card
 				shadow="sm"
@@ -71,11 +67,19 @@ export default function SubLocation() {
 				}}
 			>
 				<Card.Section>
-					<Image
-						height={140}
-						src={data.locations.picture}
-						alt={data.locations.name}
-					></Image>
+					<BackgroundImage
+						style={{ height: 140 }}
+						src={data.locations.picture}>
+						<Group position="right">
+							<Link href={`/${location}/${subloc}/report`}>
+								<Button style={{ margin: "1em 1em 0 0" }} variant='light' compact radius='sm' color='red'>
+									<Flag size={15} />
+									<Space w={2} />
+									<Text weight={500} size="sm">Report Issue</Text>
+								</Button>
+							</Link>
+						</Group>
+					</BackgroundImage>
 				</Card.Section>
 				<Group
 					position="apart"
@@ -84,7 +88,7 @@ export default function SubLocation() {
 					style={{ marginTop: '1em' }}
 				>
 					<Group position="apart" style={{ width: '100%' }}>
-						<Text weight={600} size="xl">
+						<Text weight={600} size="xl" style={{ maxWidth: '50%' }}>
 							{subloc}
 						</Text>
 						<StarButton index={data.index} />
@@ -225,7 +229,7 @@ function SubLocationIssues({ issues, mutate }) {
 					/>
 					{issues.map(
 						(issue) => (
-							<IssueAlert mutate={mutate} issue={issue} />
+							<IssueAlert key={issue.id} mutate={mutate} issue={issue} />
 						))}
 
 					<Text
@@ -250,7 +254,7 @@ function getDirections(directions) {
 				Here are specific directions to help locate this area ...
 			</Text>
 			{dirList.map(
-				direction => (<Text size="sm">{direction}</Text>))
+				direction => (<Text key={direction} size="sm">{direction}</Text>))
 			}
 			<Text mt={7} size="sm" weight={500}>
 				... and you've reached your destination!

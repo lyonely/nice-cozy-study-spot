@@ -44,7 +44,7 @@ export default function LocationPageCard({ location }) {
 				<Accordion.Item
 					label={
 						<AccordionLabel
-							label={name}
+							label="Opening Hours"
 							status={OpeningStatus({ location })}
 						/>
 					}

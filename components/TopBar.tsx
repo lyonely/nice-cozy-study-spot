@@ -30,7 +30,7 @@ export default function TopBar() {
 							<MapPin />
 
 							<div className="hotbar__title">
-								Study Space Finder
+								StudyNest
 							</div>
 						</Group>
 					</Link>

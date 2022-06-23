@@ -1,4 +1,5 @@
 import { Space, Group, Button, Text } from '@mantine/core'
+import Image from 'next/image'
 import { MapPin } from 'react-feather'
 import Link from 'next/link'
 import { useViewportSize } from '@mantine/hooks'
@@ -21,13 +22,13 @@ export default function TopBar() {
 					px="xs"
 					position="apart"
 					sx={(theme) => ({
-						padding: '0.75em 0 0.75em 0',
+						padding: '0.25em 0 0.25em 0',
 						backgroundColor: theme.colors.brown[0],
 					})}
 				>
 					<Link href="/">
-						<Group style={{ marginLeft: '0em' }}>
-							<MapPin />
+						<Group style={{ marginLeft: '1em' }}>
+							<Image height={40} width={50} src={"/logo.svg"} />
 
 							<div className="hotbar__title">
 								StudyNest

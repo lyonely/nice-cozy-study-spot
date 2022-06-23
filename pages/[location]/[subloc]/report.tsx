@@ -65,7 +65,7 @@ export default function Report(
 		}
 		const response = await fetch(`/api/report`, req)
 		console.log(response)
-		router.push(`/${location}/${subloc}`)
+		router.back()
 	}
 	return data ? (
 		<Container style={{ height: '100vh' }} >

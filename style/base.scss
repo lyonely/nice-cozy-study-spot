@@ -4,6 +4,8 @@ $DM-serif: 'DM Serif Display', serif;
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans&display=swap');
 $DM-sans: 'DM Sans', sans-serif;
 
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Quicksand:wght@300&display=swap');
+$Quicksand: 'Quicksand';
 $primary-color: #faf0d4;
 
 body {
@@ -49,8 +51,9 @@ body {
 
 .hotbar {
 	&__title {
-		font-family: $DM-sans;
-		font-size: 1.25em;
+		font-family: $Quicksand;
+		font-size: 2em;
+		letter-spacing: 1px;
 	}
 }
 

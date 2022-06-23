@@ -1,8 +1,6 @@
 import { Container, Space, Button } from '@mantine/core'
 import RoundPaper from '../components/RoundPaper'
 import Link from 'next/link'
-import { setCookie, getCookie } from 'typescript-cookie'
-import { useEffect } from 'react'
 
 export default function LandingPage() {
 	const mainContent = () => {

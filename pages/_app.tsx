@@ -7,6 +7,8 @@ import TopBar from '../components/TopBar'
 import { AppWrapper } from '../utils/state'
 import { useEffect } from 'react'
 import { getCookie, setCookie } from 'typescript-cookie'
+import CookieConsent from "react-cookie-consent";
+
 
 export default function MyApp({ Component, pageProps }: AppProps) {
 
@@ -18,6 +20,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 	})
 	return (
 		<AppWrapper>
+			<CookieConsent>This website uses cookies to save user preferences.</CookieConsent>
 			<Head>
 				<title>Imperial Study Spaces!!!</title>
 				<link rel="icon" href="/favicon.ico" />

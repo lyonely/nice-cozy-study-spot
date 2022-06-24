@@ -11,36 +11,53 @@ model locations {
   time_open     DateTime        @db.Time(6)
   time_closed   DateTime        @db.Time(6)
   name          String          @db.VarChar
-  index         Int             @id(map: "locations_pk")
   picture       String?         @db.VarChar
-  directions    String          @default("Use google maps")
   description   String?
+  index         Int             @id(map: "locations_pk") @default(autoincrement())
+  directions    String          @default("- insert google maps directions here -")
   sub_locations sub_locations[]
-
-  @@unique([name, index], map: "locations_un")
 }
 
 model sub_locations {
   capacity                 Decimal   @db.Decimal
   max_capacity             Decimal   @db.Decimal
   name                     String    @db.VarChar
-  index                    Int       @id(map: "sub_locations_pk")
   parent_index             Int
   card_access_needed       Boolean   @default(true)
-  microwave                Boolean   @db.Boolean
-  printer                  Boolean   @db.Boolean
-  monitor                  Boolean   @db.Boolean
-  plug_sockets             Boolean   @db.Boolean
-  whiteboard               Boolean   @db.Boolean
-  toilets_nearby           Boolean   @db.Boolean
-  quiet_study_available    Boolean   @db.Boolean
+  microwave                Boolean   @default(false)
+  printer                  Boolean   @default(true)
+  monitor                  Boolean   @default(false)
+  plug_sockets             Boolean   @default(true)
+  whiteboard               Boolean   @default(false)
+  toilets_nearby           Boolean   @default(true)
+  quiet_study_available    Boolean   @default(true)
   description              String    @default("some words")
-  group_study_available    Boolean   @db.Boolean
-  silent_study_available   Boolean   @db.Boolean
-  breakout_space_available Boolean   @db.Boolean
-  height_adjustable_desks  Boolean   @db.Boolean
+  group_study_available    Boolean   @default(true)
+  silent_study_available   Boolean   @default(false)
+  breakout_space_available Boolean   @default(false)
+  height_adjustable_desks  Boolean   @default(false)
   trend_capacity           Json?     @db.Json
+  index                    Int       @id(map: "sub_locations_pk") @default(autoincrement())
+  directions               String    @default("- insert google maps directions here -")
   locations                locations @relation(fields: [parent_index], references: [index], onDelete: NoAction, onUpdate: NoAction, map: "sub_locations_fk")
+  issues                   issues[]
+}
 
-  @@unique([name, index], map: "sub_locations_un")
+model users {
+  email               String? @db.VarChar
+  password            String? @db.VarChar
+  nickname            String? @db.VarChar
+  id                  Int     @id(map: "users_pk") @default(autoincrement())
+  favourite_locations Int[]
+
+  @@ignore
+}
+
+model issues {
+  resolved      Boolean
+  description   String?
+  subject       String        @default("Issue")
+  id            Int           @id(map: "issues_pk") @default(autoincrement())
+  parent_id     Int
+  sub_locations sub_locations @relation(fields: [parent_id], references: [index], onDelete: NoAction, onUpdate: NoAction, map: "issues_fk")
 }

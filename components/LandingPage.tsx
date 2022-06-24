@@ -26,7 +26,6 @@ export default function LandingPage() {
 			</div>
 		)
 	}
-
 	return (
 		<Container>
 			<div>
